@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - entropy-test-branch  # Trigger on pushes to the "entropy-test-branch" branch
-
+      
 jobs:
   build:
     name: Build for Windows
@@ -29,6 +29,13 @@ jobs:
           targetPlatform: StandaloneWindows64
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}  # Ensure the license file is passed to Unity
+
+      - name: Activate Unity License
+        run: |
+          echo "${{ secrets.UNITY_LICENSE }}" > unity_lic.ulf  # Write the license secret to a temporary file
+          /opt/Unity/Editor/Unity -batchmode -nographics -silent-crashes -logFile -activateUserLicense unity_lic.ulf  # Activate Unity license
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}  # Pass the Unity license secret to the step
 
       - name: Build Unity Project
         uses: game-ci/unity-builder@v3
