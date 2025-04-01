@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - MapleTree
+  - Boiler
+  - BoilerDropOffZone
+  - BoilerPickUpZone
+  - Sap
   layers:
   - Default
   - TransparentFX
