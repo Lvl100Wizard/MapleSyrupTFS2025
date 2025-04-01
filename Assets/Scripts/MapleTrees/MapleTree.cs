@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MapleTree : MonoBehaviour
+public class MapleTree : MonoBehaviour, IPickUpHandler
 {
     public bool canTap = true;
     public float tapCooldown = 10.0f;
@@ -8,6 +8,7 @@ public class MapleTree : MonoBehaviour
     //SapTimerUI Prefab
     public GameObject timerUIPrefab;
 
+    //SapPail Prefab
     public GameObject sapPail;
 
     private SapTimerUI timerUI;
@@ -43,9 +44,9 @@ public class MapleTree : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void HandlePickup(PlayerObjects playerInventory)
     {
-        if (other.CompareTag("Player") && canTap)
+        if (canTap)
         {
             Debug.Log("Harvesting Sap!");
             canTap = false;
@@ -53,8 +54,8 @@ public class MapleTree : MonoBehaviour
             timerUI.SetCheckmarkVisibility(false);
             timerUI.StartCooldown(tapCooldown, () => EndCooldown());
 
-            //item pickup
-            other.GetComponent<PlayerObjects>().CollectItem(sapPail);
+            //Item pickup
+            playerInventory.CollectItem(sapPail);
         }
         else if (!canTap)
         {
@@ -66,6 +67,5 @@ public class MapleTree : MonoBehaviour
     {
         canTap = true;
         timerUI.SetCheckmarkVisibility(true);
-        Debug.Log("Ready to harvest!");
     }
 }
