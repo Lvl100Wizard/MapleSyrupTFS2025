@@ -4,21 +4,40 @@ public class MapleTree : MonoBehaviour
 {
     public bool canTap = true;
     public float tapCooldown = 10.0f;
-    public SapTimerUI timerSlider; 
+
+    //SapTimerUI Prefab
+    public GameObject timerUIPrefab;
+
+    private SapTimerUI timerUI;
+    private Canvas mainCanvas;
 
     private void Start()
     {
-        if (timerSlider != null)
+        //Find the main canvas
+        mainCanvas = GameObject.FindObjectOfType<Canvas>();
+        if (mainCanvas == null)
         {
-            if (canTap)
-            {
-                timerSlider.SetSliderValue(1f);
-            }
-            else
-            {
-                timerSlider.SetSliderValue(0f);
-                timerSlider.StartCooldown(tapCooldown, () => EndCooldown());
-            }
+            Debug.LogError("No Canvas found in the scene!");
+            return;
+        }
+
+        //Instantiate UI for the MapleTree
+        GameObject timerUIObject = Instantiate(timerUIPrefab, mainCanvas.transform);
+        timerUI = timerUIObject.GetComponent<SapTimerUI>();
+
+        if (timerUI == null)
+        {
+            Debug.LogError("SapTimerUI component not found on prefab!");
+            return;
+        }
+
+        //Initializes UI at the tree's position
+        timerUI.Initialize(this.transform, canTap);
+
+        //Start cooldown if tree is not ready
+        if (!canTap)
+        {
+            timerUI.StartCooldown(tapCooldown, () => EndCooldown());
         }
     }
 
@@ -28,8 +47,9 @@ public class MapleTree : MonoBehaviour
         {
             Debug.Log("Harvesting Sap!");
             canTap = false;
-            
-            timerSlider.StartCooldown(tapCooldown, () => EndCooldown());
+
+            timerUI.SetCheckmarkVisibility(false);
+            timerUI.StartCooldown(tapCooldown, () => EndCooldown());
         }
         else if (!canTap)
         {
@@ -40,6 +60,7 @@ public class MapleTree : MonoBehaviour
     private void EndCooldown()
     {
         canTap = true;
+        timerUI.SetCheckmarkVisibility(true);
         Debug.Log("Ready to harvest!");
     }
 }
