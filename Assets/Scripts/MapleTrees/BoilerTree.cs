@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MapleTree : MonoBehaviour
+public class BoilerTree : MonoBehaviour
 {
     public bool canTap = true;
     public float tapCooldown = 10.0f;
@@ -8,7 +8,7 @@ public class MapleTree : MonoBehaviour
     //SapTimerUI Prefab
     public GameObject timerUIPrefab;
 
-    public GameObject sapPail;
+    public GameObject syrupUn;
 
     private SapTimerUI timerUI;
     private Canvas mainCanvas;
@@ -47,14 +47,14 @@ public class MapleTree : MonoBehaviour
     {
         if (other.CompareTag("Player") && canTap)
         {
-            Debug.Log("Harvesting Sap!");
+            Debug.Log("Harvesting Syrup!");
             canTap = false;
 
             timerUI.SetCheckmarkVisibility(false);
             timerUI.StartCooldown(tapCooldown, () => EndCooldown());
 
             //item pickup
-            other.GetComponent<PlayerObjects>().CollectItem(sapPail);
+            other.GetComponent<PlayerObjects>().CollectItem(syrupUn);
         }
         else if (!canTap)
         {
