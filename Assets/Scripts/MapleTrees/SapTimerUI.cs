@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
-using UnityEditor;
 
 public class SapTimerUI : MonoBehaviour
 {
@@ -11,26 +10,34 @@ public class SapTimerUI : MonoBehaviour
     public Image fillImage;
     public Gradient timerGradient;
 
+    [Header("World Space Tracking")]
+    public Vector3 offset = new Vector3(0, 2, 0); //Offset UI above the tree
+
     private float timer;
     private float timerDuration;
     private bool isCooldownActive = false;
     private Action onCooldownEnd;
+    private Transform targetTransform;
+    private Camera mainCamera;
 
     void Start()
     {
-        if (checkmarkImage != null)
+        mainCamera = Camera.main;
+        if (targetTransform != null)
         {
-            checkmarkImage.gameObject.SetActive(false);
+            UpdatePosition();
         }
     }
 
     void Update()
     {
-        if (!isCooldownActive) return;
+        
+        UpdatePosition();
 
+        //Timer update logic
+        if (!isCooldownActive) return;
         timer += Time.deltaTime;
         float progress = Mathf.Clamp01(timer / timerDuration);
-
         timerSlider.value = progress;
 
         //Gradient color based on the timer progress, ranging from red -> orange -> yellow -> green
@@ -43,7 +50,46 @@ public class SapTimerUI : MonoBehaviour
         {
             isCooldownActive = false;
             onCooldownEnd?.Invoke();
-            checkmarkImage.gameObject.SetActive(true);
+            SetCheckmarkVisibility(true);
+        }
+    }
+
+    public void Initialize(Transform target, bool isReadyToHarvest)
+    {
+        targetTransform = target;
+        UpdatePosition();
+
+        // Set the slider and checkmark based on tree state
+        if (isReadyToHarvest)
+        {
+            SetSliderValue(1f);
+            SetCheckmarkVisibility(true);
+        }
+        else
+        {
+            SetSliderValue(0f);
+            SetCheckmarkVisibility(false);
+        }
+    }
+
+    public void UpdatePosition()
+    {
+        if (mainCamera == null || targetTransform == null)
+        {
+            mainCamera = Camera.main; //Try to get camera if it's null
+            if (mainCamera == null) return;
+        }
+
+        //Calculates the world position above the tree
+        Vector3 worldPosition = targetTransform.position + offset;
+
+        //Converts world position to screen position
+        Vector3 screenPosition = mainCamera.WorldToScreenPoint(worldPosition);
+
+        //Only update if the object is in front of the camera
+        if (screenPosition.z > 0)
+        {
+            transform.position = new Vector3(screenPosition.x, screenPosition.y, transform.position.z);
         }
     }
 
@@ -53,17 +99,23 @@ public class SapTimerUI : MonoBehaviour
         timer = 0;
         isCooldownActive = true;
         onCooldownEnd = cooldownEndCallback;
-        checkmarkImage.gameObject.SetActive(false);
+        SetCheckmarkVisibility(false);
     }
 
     public void SetSliderValue(float value)
     {
         timerSlider.value = value;
-
-        //Update slider color immediately based on the value
         if (fillImage != null)
         {
             fillImage.color = timerGradient.Evaluate(value);
+        }
+    }
+
+    public void SetCheckmarkVisibility(bool show)
+    {
+        if (checkmarkImage != null)
+        {
+            checkmarkImage.gameObject.SetActive(show);
         }
     }
 }
