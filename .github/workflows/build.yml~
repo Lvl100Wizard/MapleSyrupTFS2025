@@ -36,15 +36,15 @@ jobs:
 
       - name: Check Build Output Directory
         run: |
-          echo "Listing contents of build directory"
-          ls -al build  # Ensure that build/ exists and contains the expected directories
-          ls -al build/StandaloneWindows64  # Check the specific output folder
+          echo "Listing contents of remote-builds directory"
+          ls -al remote-builds  # Ensure that remote-builds/ exists and contains the expected directories
+          ls -al remote-builds/StandaloneWindows64  # Check the specific output folder
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Build
-          path: build/StandaloneWindows64  # Path to the build output
+          path: remote-builds/StandaloneWindows64  # Path to the remote-builds output
 
   deploy:
     name: Deploy to Itch.io
@@ -59,7 +59,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Build  # Artifact name from the previous job
-          path: build/  # Directory to store the downloaded artifact
+          path: remote-builds/  # Directory to store the downloaded artifact
 
       - name: Install Butler
         run: |
@@ -75,6 +75,6 @@ jobs:
 
       - name: Deploy to Itch.io
         run: |
-          butler push build/StandaloneWindows64 ${{ secrets.ITCH_USERNAME }}/${{ secrets.ITCH_GAME }}:${{ secrets.ITCH_CHANNEL }}
+          butler push remote-builds/StandaloneWindows64 ${{ secrets.ITCH_USERNAME }}/${{ secrets.ITCH_GAME }}:${{ secrets.ITCH_CHANNEL }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}

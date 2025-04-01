@@ -41,7 +41,7 @@ jobs:
           ls -al remote-builds/StandaloneWindows64  # Check the specific output folder
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Build
           path: remote-builds/StandaloneWindows64  # Path to the remote-builds output
@@ -56,7 +56,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download Build Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Build  # Artifact name from the previous job
           path: remote-builds/  # Directory to store the downloaded artifact
