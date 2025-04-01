@@ -3,7 +3,7 @@ name: Unity Build and Deploy
 on:
   push:
     branches:
-      - entropy-test-branch  # Only trigger on pushes to the "entropy-test-branch" branch
+      - entropy-test-branch  # Trigger on pushes to the "entropy-test-branch" branch
 
 jobs:
   build:
@@ -27,12 +27,16 @@ jobs:
         with:
           unityVersion: 2022.3.0f1
           targetPlatform: StandaloneWindows64
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}  # Ensure the license file is passed to Unity
 
       - name: Build Unity Project
         uses: game-ci/unity-builder@v3
         with:
           unityVersion: 2022.3.0f1
           targetPlatform: StandaloneWindows64
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}  # Ensure the license file is passed to Unity
 
       - name: Check Build Output Directory
         run: |
@@ -40,11 +44,11 @@ jobs:
           ls -al remote-builds  # Ensure that remote-builds/ exists and contains the expected directories
           ls -al remote-builds/StandaloneWindows64  # Check the specific output folder
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload Build Artifact (v4)
+        uses: actions/upload-artifact@v4
         with:
           name: Build
-          path: remote-builds/StandaloneWindows64  # Path to the remote-builds output
+          path: remote-builds/StandaloneWindows64  # Path to the build output
 
   deploy:
     name: Deploy to Itch.io
@@ -55,8 +59,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v3
+      - name: Download Build Artifact (v4)
+        uses: actions/download-artifact@v4
         with:
           name: Build  # Artifact name from the previous job
           path: remote-builds/  # Directory to store the downloaded artifact
