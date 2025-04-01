@@ -3,7 +3,7 @@ name: Unity Build and Deploy
 on:
   push:
     branches:
-      - release  # Only trigger on pushes to the "release" branch
+      - alpha-release  # Only trigger on pushes to the "alpha-release" branch
 
 jobs:
   build:
