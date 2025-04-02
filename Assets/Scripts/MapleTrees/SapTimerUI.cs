@@ -31,7 +31,7 @@ public class SapTimerUI : MonoBehaviour
 
     void Update()
     {
-        
+
         UpdatePosition();
 
         //Timer update logic

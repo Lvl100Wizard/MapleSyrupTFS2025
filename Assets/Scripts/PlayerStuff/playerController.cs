@@ -40,12 +40,17 @@ public class playerController : MonoBehaviour
     void Look()
     {
 
+        //rotate 45 to account for camera rotation
+        var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+
+        var skewedInput = matrix.MultiplyPoint3x4(_input);
+
         //this prevents snapping to the default angle
         if (_input == Vector3.zero) return;
 
 
         //basically rotating the player model based on input so they can travel in that direction
-        var relative = (transform.position + _input) - transform.position;
+        var relative = (transform.position + skewedInput) - transform.position;
         var rot = Quaternion.LookRotation(relative, Vector3.up);
 
 
