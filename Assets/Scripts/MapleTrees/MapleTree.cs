@@ -58,7 +58,7 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
             timerUI.StartCooldown(tapCooldown, () => EndCooldown());
 
             //Item pickup
-            playerInventory.CollectItem(sapPail);
+            playerInventory.CollectItem(sapPail, this.transform);
 
             bucketMesh.enabled = false;
         }

@@ -73,7 +73,7 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             int sapNeeded = maxSapRequired - currentSapCount;
             int sapToDeposit = Mathf.Min(sapHeld, sapNeeded);
 
-            playerInventory.DropOffItems(sapToDeposit, "Sap");
+            playerInventory.DropOffItems(sapToDeposit, "Sap", this.transform);
             currentSapCount += sapToDeposit;
 
             Debug.Log($"Sap added! Current count: {currentSapCount}/{maxSapRequired}");
