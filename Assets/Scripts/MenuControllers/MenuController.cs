@@ -12,10 +12,13 @@ public class MenuController : MonoBehaviour
     public GameObject howToPlayPanel;
     public GameObject settingsPanel;
 
-    //[Header("Volume Settings")]
-    //[SerializeField] private TMP_Text volumeTextValue = null;
-    //[SerializeField] private Slider volumeSlider = null;
-    //[SerializeField] private float defaultVolume = 1.0f;
+    [Header("Settings UI Elements")]
+    public Slider masterVolumeSlider;
+    public TMP_Text masterVolumeTextValue;
+    public Slider musicVolumeSlider;
+    public TMP_Text musicVolumeTextValue;
+    public Slider sfxVolumeSlider;
+    public TMP_Text soundFXVolumeTextValue;
 
     [Header("MainMenu Buttons")]
     public Button playButton;
@@ -30,8 +33,10 @@ public class MenuController : MonoBehaviour
     public Button applySettingsButton;
     public Button settingsBackButton;
 
-    //[Header("Audio Settings")]
-    //public AudioMixer audioMixer;
+    // Cache original values for reverting if user cancels
+    private float originalMasterVolume;
+    private float originalMusicVolume;
+    private float originalSfxVolume;
 
     private Stack<GameObject> panelHistory = new Stack<GameObject>();
 
@@ -43,35 +48,131 @@ public class MenuController : MonoBehaviour
         settingsButton.onClick.AddListener(() => OpenPanel(settingsPanel));
         quitButton.onClick.AddListener(QuitGame);
         howToPlayBackButton.onClick.AddListener(BackToPreviousPanel);
-        //applySettingsButton.onClick.AddListener(ApplySettings);
-        settingsBackButton.onClick.AddListener(BackToPreviousPanel);
+        settingsBackButton.onClick.AddListener(CancelSettings);
+        applySettingsButton.onClick.AddListener(ApplySettings);
 
-        //InitializeVolumeSettings();
+        // Initialize audio settings
+        InitializeVolumeSettings();
+
+        // Add onValueChanged listeners for updating text values
+        masterVolumeSlider.onValueChanged.AddListener(UpdateMasterVolumeText);
+        musicVolumeSlider.onValueChanged.AddListener(UpdateMusicVolumeText);
+        sfxVolumeSlider.onValueChanged.AddListener(UpdateSfxVolumeText);
+
+        // Initial text updates
+        UpdateMasterVolumeText(masterVolumeSlider.value);
+        UpdateMusicVolumeText(musicVolumeSlider.value);
+        UpdateSfxVolumeText(sfxVolumeSlider.value);
     }
 
-    //void InitializeVolumeSettings()
-    //{
-    //    float savedVolume = PlayerPrefs.GetFloat("masterVolume", defaultVolume);
-    //    volumeSlider.value = savedVolume;
-    //    audioMixer.SetFloat("MasterVolume", Mathf.Log10(savedVolume) * 20);
-    //    volumeTextValue.text = (savedVolume * 100).ToString("0") + "%";
-    //    volumeSlider.onValueChanged.AddListener(SetVolume);
-    //}
+    void InitializeVolumeSettings()
+    {
+        // Load saved settings
+        masterVolumeSlider.value = PlayerPrefs.GetFloat("masterVolume", 1.0f);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 1.0f);
+        sfxVolumeSlider.value = PlayerPrefs.GetFloat("soundFXVolume", 1.0f);
 
-    //public void SetVolume(float volume)
-    //{
-    //    audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
-    //    volumeTextValue.text = (volume * 100).ToString("0") + "%";
-    //}
+        // Cache original values
+        originalMasterVolume = masterVolumeSlider.value;
+        originalMusicVolume = musicVolumeSlider.value;
+        originalSfxVolume = sfxVolumeSlider.value;
+
+        // Add preview listeners for real-time adjustments only
+        masterVolumeSlider.onValueChanged.AddListener(PreviewMasterVolume);
+        musicVolumeSlider.onValueChanged.AddListener(PreviewMusicVolume);
+        sfxVolumeSlider.onValueChanged.AddListener(PreviewSfxVolume);
+    }
+
+    // Preview functions - updates mixer but doesn't save to PlayerPrefs
+    void PreviewMasterVolume(float volume)
+    {
+        AudioMixerManager.instance.UpdateMasterVolume(volume);
+    }
+
+    void PreviewMusicVolume(float volume)
+    {
+        AudioMixerManager.instance.UpdateMusicVolume(volume);
+    }
+
+    void PreviewSfxVolume(float volume)
+    {
+        AudioMixerManager.instance.UpdateSoundFXVolume(volume);
+    }
+
+    // Text update functions
+    void UpdateMasterVolumeText(float value)
+    {
+        masterVolumeTextValue.text = Mathf.RoundToInt(value * 100).ToString() + "%";
+    }
+
+    void UpdateMusicVolumeText(float value)
+    {
+        musicVolumeTextValue.text = Mathf.RoundToInt(value * 100).ToString() + "%";
+    }
+
+    void UpdateSfxVolumeText(float value)
+    {
+        soundFXVolumeTextValue.text = Mathf.RoundToInt(value * 100).ToString() + "%";
+    }
+
+    public void ApplySettings()
+    {
+        // Save the current slider values to PlayerPrefs
+        PlayerPrefs.SetFloat("masterVolume", masterVolumeSlider.value);
+        PlayerPrefs.SetFloat("musicVolume", musicVolumeSlider.value);
+        PlayerPrefs.SetFloat("soundFXVolume", sfxVolumeSlider.value);
+        PlayerPrefs.Save();
+
+        // Update cached original values
+        originalMasterVolume = masterVolumeSlider.value;
+        originalMusicVolume = musicVolumeSlider.value;
+        originalSfxVolume = sfxVolumeSlider.value;
+
+        Debug.Log("Settings applied and saved");
+
+        // Return to previous panel
+        BackToPreviousPanel();
+    }
+
+    // Cancel settings and revert to original values
+    public void CancelSettings()
+    {
+        // Revert slider UI
+        masterVolumeSlider.value = originalMasterVolume;
+        musicVolumeSlider.value = originalMusicVolume;
+        sfxVolumeSlider.value = originalSfxVolume;
+
+        // Revert mixer values
+        AudioMixerManager.instance.UpdateMasterVolume(originalMasterVolume);
+        AudioMixerManager.instance.UpdateMusicVolume(originalMusicVolume);
+        AudioMixerManager.instance.UpdateSoundFXVolume(originalSfxVolume);
+
+        // Go back to previous panel
+        BackToPreviousPanel();
+    }
 
     public void StartGame()
     {
-        SceneManager.LoadScene("TestScene_Jacob");
+        SceneManager.LoadScene("AidenTestScene");
     }
 
     public void OpenPanel(GameObject panelToOpen)
     {
         if (panelToOpen.activeSelf) return;
+
+        // Special case for settings panel
+        if (panelToOpen == settingsPanel)
+        {
+            // Cache current saved values when entering settings
+            originalMasterVolume = PlayerPrefs.GetFloat("masterVolume", 1.0f);
+            originalMusicVolume = PlayerPrefs.GetFloat("musicVolume", 1.0f);
+            originalSfxVolume = PlayerPrefs.GetFloat("soundFXVolume", 1.0f);
+
+            // Update UI to match saved values
+            masterVolumeSlider.value = originalMasterVolume;
+            musicVolumeSlider.value = originalMusicVolume;
+            sfxVolumeSlider.value = originalSfxVolume;
+        }
 
         if (panelHistory.Count == 0 || panelHistory.Peek() != panelToOpen)
         {
@@ -101,12 +202,6 @@ public class MenuController : MonoBehaviour
         Application.Quit();
 #endif
     }
-
-    //public void ApplySettings()
-    //{
-    //    PlayerPrefs.SetFloat("masterVolume", volumeSlider.value);
-    //    PlayerPrefs.Save();
-    //}
 
     private GameObject GetActivePanel()
     {

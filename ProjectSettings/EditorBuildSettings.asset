@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScene_Jacob.unity
     guid: 5ce1637e28c64f94f91ae607fdce2a8f
+  - enabled: 1
+    path: Assets/Scenes/AidenTestScene.unity
+    guid: 2578a1916356c25418a42a7021d021ab
   m_configObjects: {}
