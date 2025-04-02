@@ -6,6 +6,9 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
     public bool canTap = true;
     public float tapCooldown = 10.0f;
 
+    //Pickup Audio
+    [SerializeField] private AudioClip pickupClip;
+
     //SapTimerUI Prefab
     public GameObject timerUIPrefab;
 
@@ -59,6 +62,8 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
     {
         if (canTap)
         {
+            //Play SoundFX
+            SoundFXManager.instance.PlaySoundFXClip(pickupClip, transform, 1f);
             Debug.Log("Harvesting Sap!");
             canTap = false;
 

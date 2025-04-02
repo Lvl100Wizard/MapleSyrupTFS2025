@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTap: 1
   tapCooldown: 10
+  pickupClip: {fileID: 8300000, guid: a2ec4f980724985448ea2a24562a7778, type: 3}
   timerUIPrefab: {fileID: 6771584836555987216, guid: ac95a0698424a0340be6cbbf0843765a, type: 3}
   sapPail: {fileID: 5410637208385230914, guid: c6ea1d2085850da459d158c5a656fd83, type: 3}
   bucketMesh: {fileID: 1304411181714115300}
