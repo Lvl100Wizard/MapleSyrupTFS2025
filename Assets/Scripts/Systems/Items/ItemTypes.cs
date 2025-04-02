@@ -2,12 +2,12 @@ public class ItemTypes
 {
 
     #region variables
-    public enum Types
+    public enum Types //values here must match existing unity tags
     {
-        sap,
-        taffee,
-        syrup,
-        bacon,
+        Sap,
+        Taffee,
+        Syrup,
+        Bacon,
     };
 
     public Types type;

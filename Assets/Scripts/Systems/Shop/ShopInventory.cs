@@ -24,10 +24,10 @@ public class ShopInventory : AbstractSOContainer
     #region Custom Functions
     public void InitShop()
     {
-        sap.Type = ItemTypes.Types.sap;
-        syrup.Type = ItemTypes.Types.syrup;
-        taffee.Type = ItemTypes.Types.taffee;
-        bacon.Type = ItemTypes.Types.bacon;
+        sap.Type = ItemTypes.Types.Sap;
+        syrup.Type = ItemTypes.Types.Syrup;
+        taffee.Type = ItemTypes.Types.Taffee;
+        bacon.Type = ItemTypes.Types.Bacon;
     }
     #endregion
 }
