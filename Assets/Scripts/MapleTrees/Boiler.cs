@@ -32,8 +32,16 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             return;
         }
 
+        //Finds the GameUIPanel inside the Canvas for UI placement
+        Transform gameUIPanelTransform = mainCanvas.transform.Find("GameUIPanel");
+        if (gameUIPanelTransform == null)
+        {
+            Debug.LogError("No GameUIPanel found inside the Canvas!");
+            return;
+        }
+
         //Instantiate Timer UI
-        GameObject timerUIObject = Instantiate(timerUIPrefab, mainCanvas.transform);
+        GameObject timerUIObject = Instantiate(timerUIPrefab, gameUIPanelTransform);
         timerUI = timerUIObject.GetComponent<SapTimerUI>();
 
         if (timerUI == null)
@@ -44,7 +52,7 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
         timerUI.Initialize(this.transform, isProducing);
 
         //Instantiate Drop-Off UI
-        GameObject dropOffUIObject = Instantiate(dropOffRequirementUIPrefab, mainCanvas.transform);
+        GameObject dropOffUIObject = Instantiate(dropOffRequirementUIPrefab, gameUIPanelTransform);
         dropOffUI = dropOffUIObject.GetComponent<DropOffRequirementUI>();
 
         if (dropOffUI == null)

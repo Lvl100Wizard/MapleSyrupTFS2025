@@ -27,8 +27,16 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
             return;
         }
 
+        //Finds the GameUIPanel inside the Canvas for UI placement
+        Transform gameUIPanelTransform = mainCanvas.transform.Find("GameUIPanel");
+        if (gameUIPanelTransform == null)
+        {
+            Debug.LogError("No GameUIPanel found inside the Canvas!");
+            return;
+        }
+
         //Instantiate UI for the MapleTree
-        GameObject timerUIObject = Instantiate(timerUIPrefab, mainCanvas.transform);
+        GameObject timerUIObject = Instantiate(timerUIPrefab, gameUIPanelTransform);
         timerUI = timerUIObject.GetComponent<SapTimerUI>();
 
         if (timerUI == null)
