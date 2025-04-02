@@ -2,116 +2,117 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
-using static UnityEditorInternal.ReorderableList;
 using UnityEngine.Audio;
+using System.Collections.Generic;
 
 public class MenuController : MonoBehaviour
 {
     [Header("UI Panels")]
     public GameObject mainMenuPanel;
+    public GameObject howToPlayPanel;
     public GameObject settingsPanel;
 
-    [Header("Volume Settings")]
-    [SerializeField] private TMP_Text volumeTextValue = null;
-    [SerializeField] private Slider volumeSlider = null;
-    [SerializeField] private float defaultVolume = 1.0f;
+    //[Header("Volume Settings")]
+    //[SerializeField] private TMP_Text volumeTextValue = null;
+    //[SerializeField] private Slider volumeSlider = null;
+    //[SerializeField] private float defaultVolume = 1.0f;
 
-    [Header("Buttons")]
+    [Header("MainMenu Buttons")]
     public Button playButton;
+    public Button howToPlayButton;
     public Button settingsButton;
     public Button quitButton;
+
+    [Header("HowToPlay Buttons")]
+    public Button howToPlayBackButton;
+
+    [Header("Settings Buttons")]
     public Button applySettingsButton;
-    public Button backButton;
-    public Button fullscreenButton;
+    public Button settingsBackButton;
 
-    [Header("Audio Settings")]
-    public AudioMixer audioMixer;
+    //[Header("Audio Settings")]
+    //public AudioMixer audioMixer;
 
-    [Header("Fullscreen Toggle")]
-    public GameObject fullscreenIconOn;
-    public GameObject fullscreenIconOff;
-
-    private bool isFullscreen = false;
+    private Stack<GameObject> panelHistory = new Stack<GameObject>();
 
     void Start()
     {
         // Assign button actions
         playButton.onClick.AddListener(StartGame);
-        settingsButton.onClick.AddListener(OpenSettings);
+        howToPlayButton.onClick.AddListener(() => OpenPanel(howToPlayPanel));
+        settingsButton.onClick.AddListener(() => OpenPanel(settingsPanel));
         quitButton.onClick.AddListener(QuitGame);
-        applySettingsButton.onClick.AddListener(ApplySettings);
-        backButton.onClick.AddListener(BackToMenu);
-        fullscreenButton.onClick.AddListener(ToggleFullscreen);
+        howToPlayBackButton.onClick.AddListener(BackToPreviousPanel);
+        //applySettingsButton.onClick.AddListener(ApplySettings);
+        settingsBackButton.onClick.AddListener(BackToPreviousPanel);
 
-        // Initialize Volume Slider
-        InitializeVolumeSettings();
+        //InitializeVolumeSettings();
     }
 
-    void InitializeVolumeSettings()
-    {
-        // Load saved volume setting, or use default if not set
-        float savedVolume = PlayerPrefs.GetFloat("masterVolume", defaultVolume);
-        volumeSlider.value = savedVolume;
-        AudioListener.volume = savedVolume;
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(savedVolume) * 20); // Apply to AudioMixer
-        volumeTextValue.text = (savedVolume * 100).ToString("0") + "%"; // Show percentage
+    //void InitializeVolumeSettings()
+    //{
+    //    float savedVolume = PlayerPrefs.GetFloat("masterVolume", defaultVolume);
+    //    volumeSlider.value = savedVolume;
+    //    audioMixer.SetFloat("MasterVolume", Mathf.Log10(savedVolume) * 20);
+    //    volumeTextValue.text = (savedVolume * 100).ToString("0") + "%";
+    //    volumeSlider.onValueChanged.AddListener(SetVolume);
+    //}
 
-        // Update volume text and volume when slider changes
-        volumeSlider.onValueChanged.AddListener(SetVolume);
-    }
-
-    public void SetVolume(float volume)
-    {
-        // Update the audio volume
-        AudioListener.volume = volume;
-
-        // Update the AudioMixer volume if you're using one
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
-
-        // Update the volume text with percentage format
-        volumeTextValue.text = (volume * 100).ToString("0") + "%";
-    }
+    //public void SetVolume(float volume)
+    //{
+    //    audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+    //    volumeTextValue.text = (volume * 100).ToString("0") + "%";
+    //}
 
     public void StartGame()
     {
-        SceneManager.LoadScene("LevelScene");
+        SceneManager.LoadScene("TestScene_Jacob");
     }
 
-    public void OpenSettings()
+    public void OpenPanel(GameObject panelToOpen)
     {
-        settingsPanel.SetActive(true);
-        mainMenuPanel.SetActive(false);
+        if (panelToOpen.activeSelf) return;
+
+        if (panelHistory.Count == 0 || panelHistory.Peek() != panelToOpen)
+        {
+            panelHistory.Push(GetActivePanel());
+        }
+
+        GetActivePanel()?.SetActive(false);
+        panelToOpen.SetActive(true);
     }
-    public void BackToMenu()
+
+    public void BackToPreviousPanel()
     {
-        mainMenuPanel.SetActive(true);
-        settingsPanel.SetActive(false);
-    }
-
-    public void ToggleFullscreen()
-    {
-        isFullscreen = !isFullscreen;
-
-        Screen.fullScreen = isFullscreen;
-
-        fullscreenIconOn.SetActive(isFullscreen);
-        fullscreenIconOff.SetActive(!isFullscreen);
+        if (panelHistory.Count > 0)
+        {
+            GameObject previousPanel = panelHistory.Pop();
+            GetActivePanel()?.SetActive(false);
+            previousPanel.SetActive(true);
+        }
     }
 
     public void QuitGame()
     {
         Debug.Log("Quit Game called");
-
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit();  // Quits the game when it’s a built executable
+        Application.Quit();
 #endif
     }
 
-    public void ApplySettings()
+    //public void ApplySettings()
+    //{
+    //    PlayerPrefs.SetFloat("masterVolume", volumeSlider.value);
+    //    PlayerPrefs.Save();
+    //}
+
+    private GameObject GetActivePanel()
     {
-        PlayerPrefs.SetFloat("masterVolume", volumeSlider.value);
-        PlayerPrefs.Save();
+        if (mainMenuPanel.activeSelf) return mainMenuPanel;
+        if (howToPlayPanel.activeSelf) return howToPlayPanel;
+        if (settingsPanel.activeSelf) return settingsPanel;
+        return null;
     }
 }

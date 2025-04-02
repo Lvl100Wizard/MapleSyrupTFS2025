@@ -9,6 +9,11 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
     public int maxSapRequired = 4;
     private int currentSapCount = 0;
 
+    //Audio
+    //Pickup Audio
+    [SerializeField] private AudioClip dropOffClip;
+    [SerializeField] private AudioClip pickupClip;
+
     //UI Prefabs
     public GameObject timerUIPrefab;
     public GameObject dropOffRequirementUIPrefab;
@@ -84,6 +89,8 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             playerInventory.DropOffItems(sapToDeposit, "Sap", this.transform);
             currentSapCount += sapToDeposit;
 
+            //Play SoundFX
+            SoundFXManager.instance.PlaySoundFXClip(dropOffClip, transform, 1f);
             Debug.Log($"Sap added! Current count: {currentSapCount}/{maxSapRequired}");
 
             // Update Drop-Off UI
@@ -107,6 +114,8 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
     {
         if (hasSyrup && playerInventory != null)
         {
+            //Play SoundFX
+            SoundFXManager.instance.PlaySoundFXClip(pickupClip, transform, 1f);
             Debug.Log("Player picked up syrup!");
             playerInventory.CollectItem(syrupPrefab, this.transform);
             hasSyrup = false;
