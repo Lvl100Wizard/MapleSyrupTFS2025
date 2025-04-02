@@ -34,6 +34,9 @@ public class PlayerObjects : MonoBehaviour
             return false;
         });
 
+        UpdateStackPositions();
+
+
         Debug.Log($"{droppedCount} {itemTag} items dropped off.");
     }
 
@@ -71,5 +74,13 @@ public class PlayerObjects : MonoBehaviour
     public int GetHeldItemCount()
     {
         return heldItems.Count;
+    }
+
+    private void UpdateStackPositions()
+    {
+        for (int i = 0; i < heldItems.Count; i++)
+        {
+            heldItems[i].transform.localPosition = new Vector3(0, i * stackHeight, 0);
+        }
     }
 }
