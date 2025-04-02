@@ -76,6 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2279407066166407645}
   - component: {fileID: 7457893061079513468}
+  - component: {fileID: -4189989932177820381}
   m_Layer: 0
   m_Name: MapleTree
   m_TagString: MapleTree
@@ -120,6 +121,20 @@ MonoBehaviour:
   timerUIPrefab: {fileID: 6771584836555987216, guid: ac95a0698424a0340be6cbbf0843765a, type: 3}
   sapPail: {fileID: 5410637208385230914, guid: c6ea1d2085850da459d158c5a656fd83, type: 3}
   bucketMesh: {fileID: 1304411181714115300}
+--- !u!114 &-4189989932177820381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943495585636308200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf332ba2695e004e9c865a7ba33350c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structure: {fileID: 2279407066166407645}
+  buildTime: 1
 --- !u!1 &2959699429654608012
 GameObject:
   m_ObjectHideFlags: 0
