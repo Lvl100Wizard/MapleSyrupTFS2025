@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MapleTree : MonoBehaviour, IPickUpHandler
 {
@@ -10,6 +11,8 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
 
     //SapPail Prefab
     public GameObject sapPail;
+
+    public MeshRenderer bucketMesh;
 
     private SapTimerUI timerUI;
     private Canvas mainCanvas;
@@ -56,6 +59,8 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
 
             //Item pickup
             playerInventory.CollectItem(sapPail);
+
+            bucketMesh.enabled = false;
         }
         else if (!canTap)
         {
@@ -66,6 +71,8 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
     private void EndCooldown()
     {
         canTap = true;
+        bucketMesh.enabled = true;
+
         timerUI.SetCheckmarkVisibility(true);
     }
 }
