@@ -9,18 +9,22 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
     public int maxSapRequired = 4;
     private int currentSapCount = 0;
 
-    // BoilerTimerUI Prefab
+    //UI Prefabs
     public GameObject timerUIPrefab;
+    public GameObject dropOffRequirementUIPrefab;
 
-    // SyrupPail Prefab
+    //Syrup Prefab
     public GameObject syrupPrefab;
 
     private SapTimerUI timerUI;
+    private DropOffRequirementUI dropOffUI;
     private Canvas mainCanvas;
+
+    [Header("Item Requirement Icon")]
+    public Sprite sapIcon; //Assign in the Inspector
 
     private void Start()
     {
-        // Find the main canvas
         mainCanvas = GameObject.FindObjectOfType<Canvas>();
         if (mainCanvas == null)
         {
@@ -28,7 +32,7 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             return;
         }
 
-        // Instantiate UI for this boiler
+        //Instantiate Timer UI
         GameObject timerUIObject = Instantiate(timerUIPrefab, mainCanvas.transform);
         timerUI = timerUIObject.GetComponent<SapTimerUI>();
 
@@ -37,9 +41,19 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             Debug.LogError("SapTimerUI component not found on prefab!");
             return;
         }
-
-        // Initialize UI to follow the boiler
         timerUI.Initialize(this.transform, isProducing);
+
+        //Instantiate Drop-Off UI
+        GameObject dropOffUIObject = Instantiate(dropOffRequirementUIPrefab, mainCanvas.transform);
+        dropOffUI = dropOffUIObject.GetComponent<DropOffRequirementUI>();
+
+        if (dropOffUI == null)
+        {
+            Debug.LogError("DropOffRequirementUI component not found on prefab!");
+            return;
+        }
+
+        dropOffUI.Initialize(this.transform, sapIcon, maxSapRequired);
     }
 
     public void HandleDropOff(PlayerObjects playerInventory)
@@ -57,17 +71,22 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
         if (sapHeld > 0)
         {
             int sapNeeded = maxSapRequired - currentSapCount;
-            int sapToDeposit = Mathf.Min(sapHeld, sapNeeded); // Take only what's needed
+            int sapToDeposit = Mathf.Min(sapHeld, sapNeeded);
 
             playerInventory.DropOffItems(sapToDeposit, "Sap");
             currentSapCount += sapToDeposit;
 
             Debug.Log($"Sap added! Current count: {currentSapCount}/{maxSapRequired}");
 
+            // Update Drop-Off UI
+            dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
+
+            // Hide Drop-Off UI when requirement is met
             if (currentSapCount >= maxSapRequired)
             {
                 Debug.Log("Boiler fueled! Starting production.");
                 StartProduction();
+                dropOffUI.SetVisible(false); // Hide UI
             }
         }
         else
@@ -76,20 +95,21 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
         }
     }
 
-
     public void HandlePickup(PlayerObjects playerInventory)
     {
-        if (hasSyrup)
+        if (hasSyrup && playerInventory != null)
         {
-            if (playerInventory != null)
-            {
-                Debug.Log("Player picked up syrup!");
-                playerInventory.CollectItem(syrupPrefab);
-                hasSyrup = false;
-                currentSapCount = 0;
-                timerUI.SetCheckmarkVisibility(false);
-                timerUI.SetSliderValue(0f);
-            }
+            Debug.Log("Player picked up syrup!");
+            playerInventory.CollectItem(syrupPrefab);
+            hasSyrup = false;
+            currentSapCount = 0;
+
+            timerUI.SetCheckmarkVisibility(false);
+            timerUI.SetSliderValue(0f);
+
+            // Reset the Drop-Off UI and make it visible again
+            dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
+            dropOffUI.SetVisible(true); // Show UI again
         }
     }
 
@@ -97,7 +117,7 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
     {
         isProducing = true;
         timerUI.SetCheckmarkVisibility(false);
-        timerUI.StartCooldown(productionTime, () => FinishProduction());
+        timerUI.StartCooldown(productionTime, FinishProduction);
     }
 
     private void FinishProduction()
