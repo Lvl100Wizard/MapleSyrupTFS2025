@@ -100,7 +100,7 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
         if (hasSyrup && playerInventory != null)
         {
             Debug.Log("Player picked up syrup!");
-            playerInventory.CollectItem(syrupPrefab);
+            playerInventory.CollectItem(syrupPrefab, this.transform);
             hasSyrup = false;
             currentSapCount = 0;
 
