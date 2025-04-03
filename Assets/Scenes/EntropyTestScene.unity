@@ -1341,6 +1341,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5047290397725300037, guid: 54bc6a98cab39ce4285d04be74a48131, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: cf610e6285113c24a90f98f8e038e444, type: 2}
+    - target: {fileID: 5047290397725300037, guid: 54bc6a98cab39ce4285d04be74a48131, type: 3}
       propertyPath: dropOffRequirementUIPrefab
       value: 
       objectReference: {fileID: 4332482053209563646, guid: 46d0fd43c3a36734e8e3c45abbc433ff, type: 3}

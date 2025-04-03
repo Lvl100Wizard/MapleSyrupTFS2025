@@ -5,10 +5,10 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
     [Header("Production Variables")]    
     //UI Prefabs
     public GameObject dropOffRequirementUIPrefab;
-    //private ShopInventory inventory = new ShopInventory();
+    [SerializeField] private ShopInventory inventory;
     private DropOffRequirementUI dropOffUI;
     private int maxSyrupRequired = 100;
-    private int currentSyrupCount = 0;
+    private int currentSyrupCount = 0; 
     public string displaySyrupCount = "0";
 
     [SerializeField] private Wallet playerWallet;
@@ -54,8 +54,11 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
         {
             playerInventory.DropOffItems(syrupHeld, "Syrup", this.transform);
             currentSyrupCount += syrupHeld;
+            inventory.currentStockDict[ItemTypes.Types.SyrupUnfiltered] += syrupHeld;
             
+
             UnityEngine.Debug.Log($"Syrup dropped off at farm stand! Current count: {currentSyrupCount}");
+            UnityEngine.Debug.Log($"Syrup dropped off at farm stand! Current inventory: {inventory.currentStockDict[ItemTypes.Types.SyrupUnfiltered]}");
 
             // Update Drop-Off UI
             //dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
