@@ -11425,7 +11425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeCanvas: {fileID: 1196189616}
-  fadeDuration: 1.5
+  fadeDuration: 2.5
 --- !u!225 &1196189616
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -12275,6 +12275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderQueue:
+  - {fileID: 11400000, guid: aa28b38ee1e80724999e8e9551a724d0, type: 2}
+  - {fileID: 11400000, guid: ec6156937be06844f96aab6fb372a6e1, type: 2}
   - {fileID: 11400000, guid: aa28b38ee1e80724999e8e9551a724d0, type: 2}
 --- !u!1 &1979164492
 GameObject:
