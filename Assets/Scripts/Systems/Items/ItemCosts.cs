@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemCosts : MonoBehaviour
+public class ItemCosts
 {
     public Dictionary<ItemTypes.Types, float> costDict = new Dictionary<ItemTypes.Types, float>();
 
+    /*
     // Start is called before the first frame update
     void Start()
     {
@@ -25,5 +26,5 @@ public class ItemCosts : MonoBehaviour
     void Update()
     {
         
-    }
+    }*/
 }
