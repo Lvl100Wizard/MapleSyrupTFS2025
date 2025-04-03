@@ -9,6 +9,14 @@ public class StructureBuilder : MonoBehaviour
     public Transform structure;
     public float buildTime = 1f;
 
+
+    public void Start()
+    {
+
+        //disable objects at game start
+
+    }
+
     public void StartBuild()
     {
         structure.gameObject.SetActive(true);

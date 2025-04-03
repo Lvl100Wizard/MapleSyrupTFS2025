@@ -22,6 +22,8 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
 
     private void Start()
     {
+
+
         //Find the main canvas
         mainCanvas = GameObject.FindObjectOfType<Canvas>();
         if (mainCanvas == null)
