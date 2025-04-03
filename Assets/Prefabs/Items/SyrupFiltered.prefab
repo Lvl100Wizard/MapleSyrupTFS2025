@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3223696352213448257}
   - component: {fileID: 4651423951842280775}
   m_Layer: 0
-  m_Name: SyrupUn
+  m_Name: SyrupFiltered
   m_TagString: SyrupUnrefined
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7683366914493356486}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.88, y: -0.30437496, z: -2.202248}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.59341, y: 0.59341, z: 0.59341}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7683366914493356486}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 2675518282960276684, guid: 89572c0582c2535479d73198c3aee257, type: 3}
 --- !u!23 &3223696352213448257
 MeshRenderer:
   m_ObjectHideFlags: 0
