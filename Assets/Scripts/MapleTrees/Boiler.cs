@@ -9,6 +9,11 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
     public int maxSapRequired = 4;
     private int currentSapCount = 0;
 
+    //Audio
+    //Pickup Audio
+    [SerializeField] private AudioClip dropOffClip;
+    [SerializeField] private AudioClip pickupClip;
+
     //UI Prefabs
     public GameObject timerUIPrefab;
     public GameObject dropOffRequirementUIPrefab;
@@ -25,6 +30,9 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
 
     private void Start()
     {
+
+
+
         mainCanvas = GameObject.FindObjectOfType<Canvas>();
         if (mainCanvas == null)
         {
@@ -32,8 +40,16 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             return;
         }
 
+        //Finds the GameUIPanel inside the Canvas for UI placement
+        Transform gameUIPanelTransform = mainCanvas.transform.Find("GameUIPanel");
+        if (gameUIPanelTransform == null)
+        {
+            Debug.LogError("No GameUIPanel found inside the Canvas!");
+            return;
+        }
+
         //Instantiate Timer UI
-        GameObject timerUIObject = Instantiate(timerUIPrefab, mainCanvas.transform);
+        GameObject timerUIObject = Instantiate(timerUIPrefab, gameUIPanelTransform);
         timerUI = timerUIObject.GetComponent<SapTimerUI>();
 
         if (timerUI == null)
@@ -42,9 +58,10 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             return;
         }
         timerUI.Initialize(this.transform, isProducing);
+        timerUI.SetUIVisibility(false);
 
         //Instantiate Drop-Off UI
-        GameObject dropOffUIObject = Instantiate(dropOffRequirementUIPrefab, mainCanvas.transform);
+        GameObject dropOffUIObject = Instantiate(dropOffRequirementUIPrefab, gameUIPanelTransform);
         dropOffUI = dropOffUIObject.GetComponent<DropOffRequirementUI>();
 
         if (dropOffUI == null)
@@ -76,17 +93,24 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             playerInventory.DropOffItems(sapToDeposit, "Sap", this.transform);
             currentSapCount += sapToDeposit;
 
+            // Play SoundFX
+            SoundFXManager.instance.PlaySoundFXClip(dropOffClip, transform, 1f);
             Debug.Log($"Sap added! Current count: {currentSapCount}/{maxSapRequired}");
 
             // Update Drop-Off UI
             dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
 
-            // Hide Drop-Off UI when requirement is met
+            // Hide Drop-Off UI and show Timer UI when requirement is met
             if (currentSapCount >= maxSapRequired)
             {
                 Debug.Log("Boiler fueled! Starting production.");
                 StartProduction();
-                dropOffUI.SetVisible(false); // Hide UI
+                dropOffUI.SetVisible(false); // Hide Drop-Off UI
+                timerUI.SetUIVisibility(true); // Show Timer UI
+            }
+            else
+            {
+                timerUI.SetUIVisibility(false); // Hide Timer UI when waiting for sap
             }
         }
         else
@@ -99,12 +123,15 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
     {
         if (hasSyrup && playerInventory != null)
         {
+            //Play SoundFX
+            SoundFXManager.instance.PlaySoundFXClip(pickupClip, transform, 1f);
             Debug.Log("Player picked up syrup!");
             playerInventory.CollectItem(syrupPrefab, this.transform);
             hasSyrup = false;
             currentSapCount = 0;
 
             timerUI.SetCheckmarkVisibility(false);
+            timerUI.SetUIVisibility(false);
             timerUI.SetSliderValue(0f);
 
             // Reset the Drop-Off UI and make it visible again
@@ -116,6 +143,7 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
     private void StartProduction()
     {
         isProducing = true;
+        timerUI.SetUIVisibility(true); // Show Timer UI when production starts
         timerUI.SetCheckmarkVisibility(false);
         timerUI.StartCooldown(productionTime, FinishProduction);
     }

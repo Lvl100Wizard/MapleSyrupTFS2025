@@ -80,17 +80,11 @@ public class SapTimerUI : MonoBehaviour
             if (mainCamera == null) return;
         }
 
-        //Calculates the world position above the tree
+        // Calculate world position above the tree
         Vector3 worldPosition = targetTransform.position + offset;
 
-        //Converts world position to screen position
-        Vector3 screenPosition = mainCamera.WorldToScreenPoint(worldPosition);
-
-        //Only update if the object is in front of the camera
-        if (screenPosition.z > 0)
-        {
-            transform.position = new Vector3(screenPosition.x, screenPosition.y, transform.position.z);
-        }
+        // Convert to screen position - use this directly like in your working UI
+        transform.position = mainCamera.WorldToScreenPoint(worldPosition);
     }
 
     public void StartCooldown(float duration, Action cooldownEndCallback)
@@ -117,5 +111,10 @@ public class SapTimerUI : MonoBehaviour
         {
             checkmarkImage.gameObject.SetActive(show);
         }
+    }
+
+    public void SetUIVisibility(bool isVisible)
+    {
+        gameObject.SetActive(isVisible);
     }
 }

@@ -6,6 +6,9 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
     public bool canTap = true;
     public float tapCooldown = 10.0f;
 
+    //Pickup Audio
+    [SerializeField] private AudioClip pickupClip;
+
     //SapTimerUI Prefab
     public GameObject timerUIPrefab;
 
@@ -19,6 +22,8 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
 
     private void Start()
     {
+
+
         //Find the main canvas
         mainCanvas = GameObject.FindObjectOfType<Canvas>();
         if (mainCanvas == null)
@@ -27,8 +32,16 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
             return;
         }
 
+        //Finds the GameUIPanel inside the Canvas for UI placement
+        Transform gameUIPanelTransform = mainCanvas.transform.Find("GameUIPanel");
+        if (gameUIPanelTransform == null)
+        {
+            Debug.LogError("No GameUIPanel found inside the Canvas!");
+            return;
+        }
+
         //Instantiate UI for the MapleTree
-        GameObject timerUIObject = Instantiate(timerUIPrefab, mainCanvas.transform);
+        GameObject timerUIObject = Instantiate(timerUIPrefab, gameUIPanelTransform);
         timerUI = timerUIObject.GetComponent<SapTimerUI>();
 
         if (timerUI == null)
@@ -51,6 +64,8 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
     {
         if (canTap)
         {
+            //Play SoundFX
+            SoundFXManager.instance.PlaySoundFXClip(pickupClip, transform, 1f);
             Debug.Log("Harvesting Sap!");
             canTap = false;
 
