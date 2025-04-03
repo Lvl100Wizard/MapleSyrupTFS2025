@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
@@ -6,11 +7,17 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
     //UI Prefabs
     public GameObject dropOffRequirementUIPrefab;
     [SerializeField] private ShopInventory inventory;
+    private ItemTypes shopItemTypes = new ItemTypes();
+    private ItemCosts priceList;
+    [SerializeField] float priceMultiplier = 1.0f;
     private DropOffRequirementUI dropOffUI;
     private int maxSyrupRequired = 100;
     private int currentSyrupCount = 0; 
     public string displaySyrupCount = "0";
-
+    [SerializeField] private int minCustomerItems = 0;
+    [SerializeField] private int maxCustomerItems = 10;
+    private int totalItemsInShop = 0; //tally of number of items in shop - required for npc pickup to work without infinite loops
+    private ItemTypes.Types itemToBuy;
     [SerializeField] private Wallet playerWallet;
 
     [Header("Item Requirement Icon")]
@@ -48,40 +55,78 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
             return;
         }
 
-        int syrupHeld = playerInventory.GetItemCountByTag("Syrup");
-        UnityEngine.Debug.Log($"Player has {syrupHeld} syrup");
-        if (syrupHeld > 0)
+        //items to collect at this farm stand
+        /*
+            Sap,
+            SyrupUnfiltered, 
+            SyrupFiltered, 
+            SyrupBottleUnfiltered,
+            SyrupBottleFiltered,
+            TaffyTray,
+            TaffyBox,
+            IceCreamBucket,
+        */
+        foreach (ItemTypes.Types itemType in System.Enum.GetValues(typeof(ItemTypes.Types)))
         {
-            playerInventory.DropOffItems(syrupHeld, "Syrup", this.transform);
-            currentSyrupCount += syrupHeld;
-            inventory.currentStockDict[ItemTypes.Types.SyrupUnfiltered] += syrupHeld;
-            
-
-            UnityEngine.Debug.Log($"Syrup dropped off at farm stand! Current count: {currentSyrupCount}");
-            UnityEngine.Debug.Log($"Syrup dropped off at farm stand! Current inventory: {inventory.currentStockDict[ItemTypes.Types.SyrupUnfiltered]}");
-
-            // Update Drop-Off UI
-            //dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
-            displaySyrupCount = currentSyrupCount.ToString();
-
+            var numHeld = playerInventory.GetItemCountByTag(itemType.ToString());
+            if (numHeld > 0)
+            {
+                playerInventory.DropOffItems(numHeld, itemType.ToString(), this.transform);
+                inventory.currentStockDict[itemType] += numHeld;
+                UnityEngine.Debug.Log($"{itemType} dropped off at farm stand! Current inventory: {inventory.currentStockDict[itemType]}");
+            }
+            else
+            {
+                UnityEngine.Debug.Log($"No {itemType} to drop off!");
+            }
         }
-        else
-        {
-            UnityEngine.Debug.Log("No syrup to drop off!");
-        }
+
     }
+
     /* TODO: update to handle NPC pickups */
     public void HandlePickup()
     {
-        UnityEngine.Debug.Log("NPC came to pick up syrup!");
-        if (currentSyrupCount > 0)
+        //NPC will roll the number of items they want between min/max       
+        int itemsWanted = UnityEngine.Random.Range(minCustomerItems, maxCustomerItems); // Generates a number between 1 and 9
+        UnityEngine.Debug.Log($"NPC came to pick up {minCustomerItems}!");
+
+        //iterate over the number of items they want
+        for(int i=0; i < itemsWanted; i++)
         {
-            UnityEngine.Debug.Log("NPC picked up syrup!");
-            currentSyrupCount--;
-            displaySyrupCount = currentSyrupCount.ToString();
-            playerWallet.GetMoney(20.0f);
-            UnityEngine.Debug.Log($"player wallet contains {playerWallet.Money}");
+            //pick a random item
+            itemToBuy = shopItemTypes.GetRandomEnumValue();
+            UnityEngine.Debug.Log($"NPC wants a {itemToBuy}!");
+
+            //if it's not in stock check for a different item
+            if (inventory.currentStockDict[itemToBuy] == 0)
+            {
+                UnityEngine.Debug.Log($"NPC wants a {itemToBuy}: none in stock!");
+                itemToBuy = shopItemTypes.GetRandomEnumValue();
+                UnityEngine.Debug.Log($"NPC will try a {itemToBuy} instead if it's in stock but will give up if it's not and move on to their next wanted item!");
+            }
+
+            
+            //if there is stock buy one, but if not we only check once for an alternate and then keep moving, odd but that's the logic for now
+            if (inventory.currentStockDict[itemToBuy] > 0)
+            {                
+                inventory.currentStockDict[itemToBuy] -= 1;
+                float payment = priceList.costDict[itemToBuy] * priceMultiplier;
+                UnityEngine.Debug.Log($"NPC buys a {itemToBuy} for {payment} beaver bucks!");
+                playerWallet.GetMoney(payment);
+            }            
+            //iterate items wanted whether the npc got what they wanted or not
+
+            //TODO: may wish to have items wanted progress over the course of the game in the future
         }
     }
 
+    private void UpdateTotalItems()
+    {
+        var totalItemsCounted = 0;
+        foreach (ItemTypes.Types itemType in System.Enum.GetValues(typeof(ItemTypes.Types)))
+        {
+            totalItemsCounted += inventory.currentStockDict[itemType];
+        }
+        totalItemsInShop = totalItemsCounted;
+    }
 }
