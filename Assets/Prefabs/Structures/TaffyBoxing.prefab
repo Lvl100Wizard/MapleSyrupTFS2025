@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3076808269279871642}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -953.409, y: -831.6184, z: -107.95321}
+  m_LocalPosition: {x: -1.12, y: 0, z: 0.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5795634, y: 1, z: 0.4725018}
-  m_Center: {x: 0.008020878, y: 0, z: 0.2579094}
+  m_Size: {x: 0.8633003, y: 0.8461099, z: 0.854731}
+  m_Center: {x: 0.16864038, y: 0.37833455, z: 0.33433357}
 --- !u!114 &4639088666019417896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ Transform:
   m_GameObject: {fileID: 6099089466969287109}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -952.486, y: -831.6184, z: -107.50921}
+  m_LocalPosition: {x: 0, y: 0, z: -0.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -119,8 +119,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.6129598, y: 1, z: 1.021797}
-  m_Center: {x: -0.1935201, y: 0, z: 0.010898471}
+  m_Size: {x: 1.779137, y: 0.83564425, z: 0.99877477}
+  m_Center: {x: -0.15169567, y: 0.3441056, z: -0.00061255693}
 --- !u!114 &3175479599705708463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1034114255609598839}
   - component: {fileID: 5853140119597000832}
+  - component: {fileID: 6657845262592784704}
   m_Layer: 0
   m_Name: TaffyBoxing
   m_TagString: Untagged
@@ -160,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 6135225095416744651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 950.942, y: 832.1184, z: 107.521}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -184,6 +185,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structure: {fileID: 1034114255609598839}
   buildTime: 1
+--- !u!114 &6657845262592784704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6135225095416744651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7103a09af29884bb334cbb24e00f72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isProducing: 0
+  hasOutput: 0
+  productionTime: 10
+  timerUIPrefab: {fileID: 6771584836555987216, guid: ac95a0698424a0340be6cbbf0843765a, type: 3}
+  dropOffRequirementUIPrefab: {fileID: 4332482053209563646, guid: 46d0fd43c3a36734e8e3c45abbc433ff, type: 3}
+  inputIcon: {fileID: 21300000, guid: ac670f9163c4b3b4bbbecc3d37314195, type: 3}
+  dropOffClip: {fileID: 8300000, guid: a2ec4f980724985448ea2a24562a7778, type: 3}
+  pickupClip: {fileID: 8300000, guid: 7ea0fb0968db9604f80a954547840b60, type: 3}
+  boxMesh: {fileID: 4483990139171113130}
+  TaffyBoxPrefab: {fileID: 1897902051779788107, guid: 891cf92826e23814bb93f2dab5f7769d, type: 3}
 --- !u!1001 &2362821078462961480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -377,15 +400,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -953.50397
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -831.6284
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -107.82921
+      value: -0.297
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -415,6 +438,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
       propertyPath: m_Name
       value: TaffyBox_TFSGJ_Spring2025
@@ -427,6 +454,11 @@ PrefabInstance:
 --- !u!4 &3346589702889796549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+  m_PrefabInstance: {fileID: 3025223677089453102}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4483990139171113130 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
   m_PrefabInstance: {fileID: 3025223677089453102}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4316108076550293518
@@ -513,15 +545,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dba86bd07fa52bb47af754c9994e3daa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -953.409
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dba86bd07fa52bb47af754c9994e3daa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -832.1184
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dba86bd07fa52bb47af754c9994e3daa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -107.50921
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dba86bd07fa52bb47af754c9994e3daa, type: 3}
       propertyPath: m_LocalRotation.w

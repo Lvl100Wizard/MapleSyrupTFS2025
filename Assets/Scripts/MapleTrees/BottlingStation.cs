@@ -35,7 +35,7 @@ public class BottlingStation : BaseProductionMachine
     {
         // Return the appropriate MeshRenderer (e.g., of a bucket or other visual element)
         return currentInputType == SyrupInputType.Premium ? premiumBottleMesh : normalBottleMesh;
-        GetComponentInChildren<MeshRenderer>();
+        //GetComponentInChildren<MeshRenderer>();
     }
 
     // Override the drop-off behavior to check for two possible inputs.

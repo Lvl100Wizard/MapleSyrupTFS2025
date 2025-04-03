@@ -8,6 +8,8 @@ public class playerController : MonoBehaviour
    [SerializeField] private Rigidbody rb;
     [SerializeField] private float turnSpeed = 360;
 
+
+    
     private Vector3 _input;
 
 
@@ -63,6 +65,20 @@ public class playerController : MonoBehaviour
 
         //move character in forward direction based on rotation and if input is present
         rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * moveSpeed * Time.deltaTime);
+
+
+        if (_input.magnitude > 0)
+        {
+            //player is moving
+
+
+        }else
+        {
+            //player is not moving
+
+
+        }
+
     }
 
 }

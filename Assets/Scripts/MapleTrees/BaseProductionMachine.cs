@@ -41,7 +41,7 @@ public abstract class BaseProductionMachine : MonoBehaviour, IDropOffHandler, IP
 
     }
 
-    public void InitializeUI()
+    public virtual void InitializeUI()
     {
         if (dropOffUI != null)
             return;
@@ -107,7 +107,7 @@ public abstract class BaseProductionMachine : MonoBehaviour, IDropOffHandler, IP
         }
     }
 
-    protected void StartProduction()
+    protected virtual void StartProduction()
     {
         isProducing = true;
         timerUI.StartCooldown(productionTime, FinishProduction);

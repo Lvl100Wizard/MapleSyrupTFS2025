@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3722540995977736805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4401140874571365746}
+  m_Layer: 0
+  m_Name: UIPOS 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4401140874571365746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3722540995977736805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.87, y: 1.99, z: 1.14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8953010031386887375}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3913372003330572859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2482736547241092745}
+  m_Layer: 0
+  m_Name: UIPOS 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2482736547241092745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3913372003330572859}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.86, y: 1.04, z: -0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8953010031386887375}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4037073853548235103
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,6 +71,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8953010031386887375}
+  - component: {fileID: 2617860742130261242}
+  - component: {fileID: 7092691030671344905}
   m_Layer: 0
   m_Name: IceCreamMachine
   m_TagString: Untagged
@@ -33,8 +97,50 @@ Transform:
   - {fileID: 4484951337652397964}
   - {fileID: 2295604054976557348}
   - {fileID: 2385404388432647048}
+  - {fileID: 2482736547241092745}
+  - {fileID: 4401140874571365746}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2617860742130261242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037073853548235103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf332ba2695e004e9c865a7ba33350c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structure: {fileID: 8953010031386887375}
+  buildTime: 1
+--- !u!114 &7092691030671344905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037073853548235103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d8e48c9f0fa0f43acafa455142c5ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isProducing: 0
+  hasOutput: 0
+  productionTime: 10
+  timerUIPrefab: {fileID: 6771584836555987216, guid: ac95a0698424a0340be6cbbf0843765a, type: 3}
+  dropOffRequirementUIPrefab: {fileID: 4332482053209563646, guid: 46d0fd43c3a36734e8e3c45abbc433ff, type: 3}
+  inputIcon: {fileID: 21300000, guid: ddcfe7d5953d16b409fa5772b89d5778, type: 3}
+  dropOffClip: {fileID: 8300000, guid: a2ec4f980724985448ea2a24562a7778, type: 3}
+  pickupClip: {fileID: 8300000, guid: 7ea0fb0968db9604f80a954547840b60, type: 3}
+  IceCreamMesh: {fileID: 3553767247173413095}
+  IceCreamPrefab: {fileID: 828296065593019847, guid: c8619cbeac6661b4cb7ef130dc7b8fb3, type: 3}
+  sapIcon: {fileID: 21300000, guid: ddcfe7d5953d16b409fa5772b89d5778, type: 3}
+  taffyIcon: {fileID: 21300000, guid: ac670f9163c4b3b4bbbecc3d37314195, type: 3}
+  Uipos1: {fileID: 2482736547241092745}
+  Uipos2: {fileID: 4401140874571365746}
 --- !u!1 &6696948281969854405
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +168,7 @@ Transform:
   m_GameObject: {fileID: 6696948281969854405}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.987, y: 0.5, z: 0.005}
+  m_LocalPosition: {x: 1.318, y: 0.5, z: 0.422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -357,6 +463,11 @@ PrefabInstance:
 --- !u!4 &2385404388432647048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 397a99421f943de48b09e365638b4de4, type: 3}
+  m_PrefabInstance: {fileID: 2778740599641273443}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3553767247173413095 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 397a99421f943de48b09e365638b4de4, type: 3}
   m_PrefabInstance: {fileID: 2778740599641273443}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5763751045715826218
