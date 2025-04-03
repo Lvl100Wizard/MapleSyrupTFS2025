@@ -57,7 +57,7 @@ MonoBehaviour:
   dropOffClip: {fileID: 8300000, guid: f391f4f26db59e646a83e828a61fa294, type: 3}
   pickupClip: {fileID: 8300000, guid: 7ea0fb0968db9604f80a954547840b60, type: 3}
   bucketMesh: {fileID: 728235084324998067}
-  syrupPrefab: {fileID: 7683366914493356486, guid: f12311b11095e94438de2f1640d61be8, type: 3}
+  syrupPrefab: {fileID: 7378483943874183354, guid: 8e26695940f94cd46a41db198d9b43be, type: 3}
 --- !u!1 &4694791061285898369
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,11 +214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ca7060fc4c0ef34189345182e25816e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.247
+      value: -1.118
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ca7060fc4c0ef34189345182e25816e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.025
+      value: 0.084
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5ca7060fc4c0ef34189345182e25816e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -258,11 +258,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 5ca7060fc4c0ef34189345182e25816e, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5ca7060fc4c0ef34189345182e25816e, type: 3}
       propertyPath: m_Name
-      value: BucketFilteredFull_TFSGJ_Spring2025
+      value: UnfilteredSyrupChild
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ca7060fc4c0ef34189345182e25816e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
