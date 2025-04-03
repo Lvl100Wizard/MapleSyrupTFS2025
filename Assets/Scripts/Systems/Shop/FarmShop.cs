@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FarmShop : MonoBehaviour, IDropOffHandler //, IPickUpHandler
+public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
 {
     [Header("Production Variables")]    
     //UI Prefabs
@@ -10,6 +10,8 @@ public class FarmShop : MonoBehaviour, IDropOffHandler //, IPickUpHandler
     private int maxSyrupRequired = 100;
     private int currentSyrupCount = 0;
     public string displaySyrupCount = "0";
+
+    [SerializeField] private Wallet playerWallet;
 
     [Header("Item Requirement Icon")]
     public Sprite sapIcon; //Assign in the Inspector
@@ -27,7 +29,7 @@ public class FarmShop : MonoBehaviour, IDropOffHandler //, IPickUpHandler
 
         GameObject dropOffUIObject = Instantiate(dropOffRequirementUIPrefab, mainCanvas.transform);
         dropOffUI = dropOffUIObject.GetComponent<DropOffRequirementUI>();
-
+        
         if (dropOffUI == null)
         {
             UnityEngine.Debug.LogError("DropOffRequirementUI component not found on prefab!");
@@ -65,23 +67,18 @@ public class FarmShop : MonoBehaviour, IDropOffHandler //, IPickUpHandler
             UnityEngine.Debug.Log("No syrup to drop off!");
         }
     }
-    /* TODO: update to handle NPC pickups
-    public void HandlePickup(PlayerObjects playerInventory)
+    /* TODO: update to handle NPC pickups */
+    public void HandlePickup()
     {
-        if (hasSyrup && playerInventory != null)
+        UnityEngine.Debug.Log("NPC came to pick up syrup!");
+        if (currentSyrupCount > 0)
         {
-            UnityEngine.Debug.Log("Player picked up syrup!");
-            playerInventory.CollectItem(syrupPrefab, this.transform);
-            hasSyrup = false;
-            currentSapCount = 0;
-
-            //timerUI.SetCheckmarkVisibility(false);
-            //timerUI.SetSliderValue(0f);
-
-            // Reset the Drop-Off UI and make it visible again
-            dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
-            dropOffUI.SetVisible(true); // Show UI again
+            UnityEngine.Debug.Log("NPC picked up syrup!");
+            currentSyrupCount--;
+            displaySyrupCount = currentSyrupCount.ToString();
+            playerWallet.GetMoney(20.0f);
+            UnityEngine.Debug.Log($"player wallet contains {playerWallet.Money}");
         }
-    }*/
+    }
 
 }
