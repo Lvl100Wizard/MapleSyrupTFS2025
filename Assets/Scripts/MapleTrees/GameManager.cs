@@ -3,10 +3,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
-    
-    
-    
+
+
+
+
     [SerializeField] private Wallet playerWallet;
 
 
@@ -29,9 +29,19 @@ public class GameManager : MonoBehaviour
             playerWallet.GiveMoney(amount);
 
             //UI guys take a look here and update this to match our system for the HUD
-           // UIManager.Instance.UpdateMoneyDisplay(playerMoney); // Update UI
+            // UIManager.Instance.UpdateMoneyDisplay(playerMoney); // Update UI
             return true;
         }
         return false;
     }
+
+    public void ReceiveMoney(int amount)
+    {
+
+        {
+            playerWallet.GetMoney(amount);
+
+        }
+    }
+
 }
