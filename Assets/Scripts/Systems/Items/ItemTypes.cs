@@ -39,4 +39,17 @@ public class ItemTypes
         Types[] values = (Types[])Enum.GetValues(typeof(Types));
         return values[UnityEngine.Random.Range(0, values.Length)];
     }
+
+    public string GetRandomEnumString()
+    {
+        Types[] values = (Types[])Enum.GetValues(typeof(Types));
+        return values[UnityEngine.Random.Range(0, values.Length)].ToString();
+    }
+
+    public Types GetRandomEnumKey()
+    {
+        Types[] values = (Types[])Enum.GetValues(typeof(Types));
+        return values[UnityEngine.Random.Range(0, values.Length)];
+    }
+
 }

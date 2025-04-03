@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
 {
@@ -7,7 +8,7 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
     //UI Prefabs
     public GameObject dropOffRequirementUIPrefab;
     [SerializeField] private ShopInventory inventory;
-    private ItemTypes shopItemTypes = new ItemTypes();
+    private ItemTypes shopItemTypes;
     private ItemCosts priceList;
     [SerializeField] float priceMultiplier = 1.0f;
     private DropOffRequirementUI dropOffUI;
@@ -17,9 +18,10 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
     [SerializeField] private int minCustomerItems = 0;
     [SerializeField] private int maxCustomerItems = 10;
     private int totalItemsInShop = 0; //tally of number of items in shop - required for npc pickup to work without infinite loops
-    private ItemTypes.Types itemToBuy;
+    private ItemTypes.Types itemToBuyKey;
+    private string itemToBuyStr;
     [SerializeField] private Wallet playerWallet;
-
+    public Dictionary<ItemTypes.Types, float> costDict = new Dictionary<ItemTypes.Types, float>();
     [Header("Item Requirement Icon")]
     public Sprite sapIcon; //Assign in the Inspector
 
@@ -27,6 +29,37 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
 
     private void Start()
     {
+        shopItemTypes = new ItemTypes();
+        priceList = new ItemCosts();
+
+        //hard code cost list for bug workaround
+        priceList.costDict[ItemTypes.Types.Sap] = 1f;
+        priceList.costDict[ItemTypes.Types.Sap] = 1f;
+        priceList.costDict[ItemTypes.Types.SyrupUnfiltered] = 6f;
+        priceList.costDict[ItemTypes.Types.SyrupFiltered] = 12f;
+        priceList.costDict[ItemTypes.Types.SyrupBottleUnfiltered] = 12f;
+        priceList.costDict[ItemTypes.Types.SyrupBottleFiltered] = 24f;
+        priceList.costDict[ItemTypes.Types.TaffyTray] = 8f;
+        priceList.costDict[ItemTypes.Types.TaffyBox] = 10f;
+        priceList.costDict[ItemTypes.Types.IceCreamBucket] = 25f;
+        //costDict[ItemTypes.Types.SnowCandySingle] = 1f;
+        //costDict[ItemTypes.Types.SnowCandyBox] = 1f;
+
+        //init stock
+        UnityEngine.Debug.Log("are we here stock check");
+        foreach (KeyValuePair<ItemTypes.Types, float> entry in priceList.costDict)
+        {
+            // Store the key in the itemKeys list
+            //itemKeys.Add(entry.Key);
+            UnityEngine.Debug.Log(entry.Key);
+        }
+
+        foreach (KeyValuePair<ItemTypes.Types, float> entry in priceList.costDict)
+        {
+            UnityEngine.Debug.Log("are we here");
+            UnityEngine.Debug.Log($"Item: {entry.Key}, Cost: {entry.Value}");
+        }
+
         mainCanvas = GameObject.FindObjectOfType<Canvas>();
         if (mainCanvas == null)
         {
@@ -94,24 +127,29 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
         for(int i=0; i < itemsWanted; i++)
         {
             //pick a random item
-            itemToBuy = shopItemTypes.GetRandomEnumValue();
-            UnityEngine.Debug.Log($"NPC wants a {itemToBuy}!");
+            //ItemTypes.Types itemType in System.Enum.GetValues(typeof(ItemTypes.Types))
+
+            itemToBuyKey = shopItemTypes.GetRandomEnumKey();
+            itemToBuyStr = itemToBuyKey.ToString();
+            //Types enumFromValue = (Types)value;
+
+            UnityEngine.Debug.Log($"NPC wants a {itemToBuyKey}!");
+
 
             //if it's not in stock check for a different item
-            if (inventory.currentStockDict[itemToBuy] == 0)
+            if (inventory.currentStockDict[itemToBuyKey] == 0)
             {
-                UnityEngine.Debug.Log($"NPC wants a {itemToBuy}: none in stock!");
-                itemToBuy = shopItemTypes.GetRandomEnumValue();
-                UnityEngine.Debug.Log($"NPC will try a {itemToBuy} instead if it's in stock but will give up if it's not and move on to their next wanted item!");
+                UnityEngine.Debug.Log($"NPC wants a {itemToBuyStr}: none in stock!");
+                itemToBuyKey = shopItemTypes.GetRandomEnumKey();
+                UnityEngine.Debug.Log($"NPC will try a {itemToBuyStr} instead if it's in stock but will give up if it's not and move on to their next wanted item!");
             }
-
             
             //if there is stock buy one, but if not we only check once for an alternate and then keep moving, odd but that's the logic for now
-            if (inventory.currentStockDict[itemToBuy] > 0)
+            if (inventory.currentStockDict[itemToBuyKey] > 0)
             {                
-                inventory.currentStockDict[itemToBuy] -= 1;
-                float payment = priceList.costDict[itemToBuy] * priceMultiplier;
-                UnityEngine.Debug.Log($"NPC buys a {itemToBuy} for {payment} beaver bucks!");
+                inventory.currentStockDict[itemToBuyKey] -= 1;
+                float payment = priceList.costDict[itemToBuyKey] * priceMultiplier;
+                UnityEngine.Debug.Log($"NPC buys a {itemToBuyKey} for {payment} beaver bucks!");
                 playerWallet.GetMoney(payment);
             }            
             //iterate items wanted whether the npc got what they wanted or not
