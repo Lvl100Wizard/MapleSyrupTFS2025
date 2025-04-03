@@ -32,6 +32,7 @@ public class OrderManager : MonoBehaviour
         else
         {
             Debug.Log("All orders completed!");
+            FadeManager.instance.FadeToScene("WinScene");
         }
     }
 }
