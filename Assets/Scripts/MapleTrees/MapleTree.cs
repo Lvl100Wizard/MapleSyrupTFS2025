@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MapleTree : MonoBehaviour, IPickUpHandler
+public class MapleTree : MonoBehaviour, IPickUpHandler, IStructureUI
 {
-    public bool canTap = true;
+    public bool canTap = false;
     public float tapCooldown = 10.0f;
 
     //Pickup Audio
@@ -17,12 +17,22 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
 
     public MeshRenderer bucketMesh;
 
-    private SapTimerUI timerUI;
+    public SapTimerUI timerUI;
     private Canvas mainCanvas;
 
     private void Start()
     {
+        
 
+
+       
+    }
+
+
+    public void InitializeUI()
+    {
+        if (timerUI != null)
+            return;
 
         //Find the main canvas
         mainCanvas = GameObject.FindObjectOfType<Canvas>();
@@ -53,12 +63,15 @@ public class MapleTree : MonoBehaviour, IPickUpHandler
         //Initializes UI at the tree's position
         timerUI.Initialize(this.transform, canTap);
 
+
+
         //Start cooldown if tree is not ready
         if (!canTap)
         {
             timerUI.StartCooldown(tapCooldown, () => EndCooldown());
         }
     }
+
 
     public void HandlePickup(PlayerObjects playerInventory)
     {
