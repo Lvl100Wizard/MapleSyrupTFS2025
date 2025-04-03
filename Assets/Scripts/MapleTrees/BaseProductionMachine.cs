@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseProductionMachine : MonoBehaviour, IDropOffHandler, IPickUpHandler
+public abstract class BaseProductionMachine : MonoBehaviour, IDropOffHandler, IPickUpHandler, IStructureUI
 {
     [Header("Production Variables")]
     public bool isProducing = false;
@@ -32,9 +32,19 @@ public abstract class BaseProductionMachine : MonoBehaviour, IDropOffHandler, IP
 
     void Start()
     {
+       
 
 
 
+
+     
+
+    }
+
+    public virtual void InitializeUI()
+    {
+        if (dropOffUI != null)
+            return;
 
         mainCanvas = FindObjectOfType<Canvas>();
         if (!mainCanvas) { Debug.LogError("No Canvas found!"); return; }
@@ -51,10 +61,9 @@ public abstract class BaseProductionMachine : MonoBehaviour, IDropOffHandler, IP
         GameObject dropOffUIObject = Instantiate(dropOffRequirementUIPrefab, gameUIPanel);
         dropOffUI = dropOffUIObject.GetComponent<DropOffRequirementUI>();
         dropOffUI.Initialize(transform, inputIcon, maxInputRequired);
-
     }
 
-    public void HandleDropOff(PlayerObjects playerInventory)
+    public virtual void HandleDropOff(PlayerObjects playerInventory)
     {
         if (isProducing || hasOutput) return;
 
@@ -98,7 +107,7 @@ public abstract class BaseProductionMachine : MonoBehaviour, IDropOffHandler, IP
         }
     }
 
-    protected void StartProduction()
+    protected virtual void StartProduction()
     {
         isProducing = true;
         timerUI.StartCooldown(productionTime, FinishProduction);

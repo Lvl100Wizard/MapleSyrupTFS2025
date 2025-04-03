@@ -22,6 +22,13 @@ public class StructureBuilder : MonoBehaviour
     {
         structure.gameObject.SetActive(true);
 
+
+        IStructureUI[] uiComponents = structure.GetComponentsInChildren<IStructureUI>();
+        foreach (var uiComponent in uiComponents)
+        {
+            uiComponent.InitializeUI();
+        }
+
         StartCoroutine(BuildSequence());
     }
    
