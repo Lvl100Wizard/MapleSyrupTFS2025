@@ -14,6 +14,7 @@ public class StructureBuilder : MonoBehaviour
     {
 
         //disable objects at game start
+        structure.gameObject.SetActive(false);
 
     }
 

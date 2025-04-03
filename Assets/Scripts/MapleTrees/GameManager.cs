@@ -3,7 +3,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public int playerMoney = 200; // Starting money
+    
+    
+    
+    
+    [SerializeField] private Wallet playerWallet;
+
+
+    public int defaultrMoney = 100; // Starting money
 
     private void Awake()
     {
@@ -11,11 +18,15 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    private void Start()
+    {
+        playerWallet.Money = defaultrMoney;
+    }
     public bool SpendMoney(int amount)
     {
-        if (playerMoney >= amount)
+        if (playerWallet.Money >= amount)
         {
-            playerMoney -= amount;
+            playerWallet.GiveMoney(amount);
 
             //UI guys take a look here and update this to match our system for the HUD
            // UIManager.Instance.UpdateMoneyDisplay(playerMoney); // Update UI
