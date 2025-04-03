@@ -650,6 +650,7 @@ MonoBehaviour:
   isFirstPoint: 0
   unlocksNextZones:
   - {fileID: 481169284}
+  - {fileID: 1541389762}
 --- !u!65 &136450330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10642,9 +10643,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1684896415}
   - component: {fileID: 1684896414}
-  - component: {fileID: 1684896417}
   - component: {fileID: 1684896416}
   - component: {fileID: 1684896418}
+  - component: {fileID: 1684896419}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -10695,19 +10696,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundFXObject: {fileID: 5202127704647049380, guid: 5955c3cd9029d9d43a6273fc8c36b103, type: 3}
---- !u!114 &1684896417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684896413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b5c2d6e28cfbff42b105e5da7fe2f6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: f3ef1a9c0a39bb04e8a2150fc3a48e18, type: 2}
 --- !u!114 &1684896418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10731,6 +10719,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 381f3cdcdfe30444aba30f38fb3c3a17, type: 2}
   - {fileID: 11400000, guid: 836683c72b32011448dfa53bd82b6c5e, type: 2}
   - {fileID: 11400000, guid: 5b97a005e7d60df488ab159bf6beb9a5, type: 2}
+--- !u!114 &1684896419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684896413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7937a7f851aec29448d773f16189dc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 1542213487}
+  resumeButton: {fileID: 1630448916}
+  mainMenuButton: {fileID: 1972314442}
+  quitButton: {fileID: 1177812447}
+  blurOverlay: {fileID: 809198297}
+  blurMaterial: {fileID: 2100000, guid: 786e6432ab7d8cc4b97d83d8a3f4d823, type: 2}
+  blurIntensity: 4
+  blurAnimationSpeed: 10
 --- !u!1001 &1692157525
 PrefabInstance:
   m_ObjectHideFlags: 0
