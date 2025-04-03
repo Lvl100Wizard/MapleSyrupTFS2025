@@ -13,7 +13,13 @@ TagManager:
   - NpcFederalReserve
   - NpcBusiness
   - Syrup
-  - SyrupUnrefined
+  - SyrupFiltered
+  - IceCreamBucket
+  - TaffyBox
+  - TaffyTray
+  - SyrupBottleFiltered
+  - SyrupBottleUnfiltered
+  - SyrupUnfiltered
   layers:
   - Default
   - TransparentFX

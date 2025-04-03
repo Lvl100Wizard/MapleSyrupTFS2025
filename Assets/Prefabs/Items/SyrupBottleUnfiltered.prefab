@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8063578394007795718}
   m_Layer: 0
   m_Name: SyrupBottleUnfiltered
-  m_TagString: Untagged
+  m_TagString: SyrupBottleUnfiltered
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
