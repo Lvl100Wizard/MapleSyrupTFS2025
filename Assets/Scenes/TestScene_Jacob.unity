@@ -2747,7 +2747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 10
   structureToUnlock: {fileID: 929920050}
-  isFirstPoint: 1
+  isFirstPoint: 0
   unlocksNextZones: []
 --- !u!65 &481169285
 BoxCollider:
@@ -8745,7 +8745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 10
   structureToUnlock: {fileID: 1866967853}
-  isFirstPoint: 1
+  isFirstPoint: 0
   unlocksNextZones: []
 --- !u!65 &1541389763
 BoxCollider:

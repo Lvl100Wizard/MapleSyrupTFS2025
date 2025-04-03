@@ -56,6 +56,7 @@ public class IceCreamMachine : BaseProductionMachine
         GameObject timerUIObject = Instantiate(timerUIPrefab, gameUIPanel);
         timerUI = timerUIObject.GetComponent<SapTimerUI>();
         timerUI.Initialize(transform, isProducing);
+        timerUI.SetUIVisibility(false);
     }
 
 
@@ -90,7 +91,30 @@ public class IceCreamMachine : BaseProductionMachine
         if (sapCount >= 4 && taffyCount >= 2)
         {
             StartProduction();
-            dropOffUI.SetVisible(false);
+            
+        }
+    }
+
+    public override void HandlePickup(PlayerObjects playerInventory)
+    {
+        if (hasOutput)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(PickupClip, transform, 1f);
+
+
+            playerInventory.CollectItem(OutputPrefab(), transform);
+            hasOutput = false;
+            currentInputCount = 0;
+
+            timerUI.SetCheckmarkVisibility(false);
+            timerUI.SetSliderValue(0f);
+            sapDropOffUI.UpdateDropOffProgress(sapCount, 4);  // Update Sap progress
+            taffyDropOffUI.UpdateDropOffProgress(taffyCount, 2); // Update Taffy progress
+
+            sapDropOffUI.SetVisible(true);
+            taffyDropOffUI.SetVisible(true);
+
+            childMesh().enabled = false;
         }
     }
 
@@ -103,6 +127,7 @@ public class IceCreamMachine : BaseProductionMachine
         taffyCount = 0;
         sapDropOffUI.SetVisible(false);
         taffyDropOffUI.SetVisible(false);
+        timerUI.SetUIVisibility(true);
     }
 
     
