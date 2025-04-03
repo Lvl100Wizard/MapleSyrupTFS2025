@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6857a9ab7f0ba0e4c8554b199aa059df, type: 3}
-  m_Name: Order_Syrup(Unrefined)
+  m_Name: Order_8
   m_EditorClassIdentifier: 
   requiredItems:
-  - itemTag: SyrupUnrefined
+  - itemTag: SyrupBottleFiltered
+    requiredAmount: 4
+    icon: {fileID: 21300000, guid: b579a68a3a2ff354789d63a08ce29928, type: 3}
+  - itemTag: TaffyTray
     requiredAmount: 1
-    icon: {fileID: 21300000, guid: 7098953aeb6fd2148b883e5cd117ca7c, type: 3}
+    icon: {fileID: 21300000, guid: ac670f9163c4b3b4bbbecc3d37314195, type: 3}

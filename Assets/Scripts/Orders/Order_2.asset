@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6857a9ab7f0ba0e4c8554b199aa059df, type: 3}
-  m_Name: Order_Sap(Dozen)
+  m_Name: Order_2
   m_EditorClassIdentifier: 
   requiredItems:
-  - itemTag: Sap
-    requiredAmount: 1
-    icon: {fileID: 21300000, guid: ddcfe7d5953d16b409fa5772b89d5778, type: 3}
+  - itemTag: SyrupUnfiltered
+    requiredAmount: 3
+    icon: {fileID: 21300000, guid: 2889a4b27d43174419137ba791d366bf, type: 3}

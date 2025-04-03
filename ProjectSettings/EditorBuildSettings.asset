@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenuScene.unity
     guid: caa38e21ba6491c4a9c7a4355ce78ecc
   - enabled: 1
-    path: Assets/Scenes/VictoryScene.unity
+    path: Assets/Scenes/WinScene.unity
     guid: e2cf8a42a29c9374a885342ed4bdaf52
   - enabled: 1
     path: Assets/Scenes/TestScene_Jacob.unity
