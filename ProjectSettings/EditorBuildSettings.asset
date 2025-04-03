@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AidenTestScene.unity
     guid: 2578a1916356c25418a42a7021d021ab
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: b124599a39c8d7648927a29f5dea8844
   m_configObjects: {}
