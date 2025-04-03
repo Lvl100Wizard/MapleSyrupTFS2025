@@ -5516,6 +5516,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 100
   structureToUnlock: {fileID: 754173804}
+  isFirstPoint: 0
+  unlocksNextZones: []
 --- !u!4 &215734236
 Transform:
   m_ObjectHideFlags: 0
@@ -5825,6 +5827,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 100
   structureToUnlock: {fileID: 1851075993}
+  isFirstPoint: 1
+  unlocksNextZones:
+  - {fileID: 215734235}
+  - {fileID: 2014051604}
 --- !u!4 &645489520
 Transform:
   m_ObjectHideFlags: 0
@@ -12103,10 +12109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderQueue:
+  - {fileID: 11400000, guid: 316acec086b7b26429e2b138132729ef, type: 2}
   - {fileID: 11400000, guid: ec6156937be06844f96aab6fb372a6e1, type: 2}
   - {fileID: 11400000, guid: f3ae5cd8c7b833c4cb35ee6c9d379bcd, type: 2}
   - {fileID: 11400000, guid: aa28b38ee1e80724999e8e9551a724d0, type: 2}
-  - {fileID: 11400000, guid: 316acec086b7b26429e2b138132729ef, type: 2}
 --- !u!1 &1979164492
 GameObject:
   m_ObjectHideFlags: 0
@@ -17004,6 +17010,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 100
   structureToUnlock: {fileID: 1081416950}
+  isFirstPoint: 0
+  unlocksNextZones: []
 --- !u!4 &2014051605
 Transform:
   m_ObjectHideFlags: 0
@@ -17368,6 +17376,10 @@ PrefabInstance:
       propertyPath: dropOffClip
       value: 
       objectReference: {fileID: 8300000, guid: f391f4f26db59e646a83e828a61fa294, type: 3}
+    - target: {fileID: 1646049518074167993, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
+      propertyPath: syrupPrefab
+      value: 
+      objectReference: {fileID: 7378483943874183354, guid: 8e26695940f94cd46a41db198d9b43be, type: 3}
     - target: {fileID: 1646049518074167993, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
       propertyPath: dropOffRequirementUIPrefab
       value: 

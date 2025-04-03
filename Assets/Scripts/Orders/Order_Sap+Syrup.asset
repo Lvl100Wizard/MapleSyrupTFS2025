@@ -16,6 +16,6 @@ MonoBehaviour:
   - itemTag: Sap
     requiredAmount: 1
     icon: {fileID: 21300000, guid: ddcfe7d5953d16b409fa5772b89d5778, type: 3}
-  - itemTag: SyrupUnrefined
+  - itemTag: SyrupUnfiltered
     requiredAmount: 1
-    icon: {fileID: 21300000, guid: 7098953aeb6fd2148b883e5cd117ca7c, type: 3}
+    icon: {fileID: 21300000, guid: 2889a4b27d43174419137ba791d366bf, type: 3}
