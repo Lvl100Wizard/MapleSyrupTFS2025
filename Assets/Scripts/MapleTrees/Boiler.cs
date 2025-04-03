@@ -32,6 +32,9 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
 
     private void Start()
     {
+
+
+
         mainCanvas = GameObject.FindObjectOfType<Canvas>();
         if (mainCanvas == null)
         {

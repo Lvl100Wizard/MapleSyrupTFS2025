@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UnlockZone : MonoBehaviour
@@ -6,8 +7,19 @@ public class UnlockZone : MonoBehaviour
 
     [SerializeField] public int price = 100;
      public StructureBuilder structureToUnlock;
+    [SerializeField] public bool isFirstPoint;
+    public List<UnlockZone> unlocksNextZones; //list of zones to activate after unlocking
     private bool isUnlocked = false;
 
+
+
+    private void Start()
+    {
+        if (!isFirstPoint)
+        {
+            gameObject.SetActive(false);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !isUnlocked)
@@ -27,6 +39,15 @@ public class UnlockZone : MonoBehaviour
     {
         isUnlocked = true;
         structureToUnlock.StartBuild();
+
+        foreach (UnlockZone zone in unlocksNextZones)
+        {
+            zone.gameObject.SetActive(true);
+        }
+
         gameObject.SetActive(false); //disable trigger zone
+
+
+       
     }
 }
