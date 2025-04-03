@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class PickUpZone : MonoBehaviour
 {
+    [SerializeField] private AgentTypes.Types agent = AgentTypes.Types.Player;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Check if the player entered
+        if (other.CompareTag(AgentTypes.GetAgentTypeStringName(agent))) // Check if the correct agent type entered - defaults to player
         {
             IPickUpHandler pickUpHandler = GetComponentInParent<IPickUpHandler>();
 
@@ -15,5 +17,6 @@ public class PickUpZone : MonoBehaviour
 
         }
     }
+    
 }
 

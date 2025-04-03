@@ -9,6 +9,10 @@ TagManager:
   - BoilerDropOffZone
   - BoilerPickUpZone
   - Sap
+  - NpcIndividual
+  - NpcFederalReserve
+  - NpcBusiness
+  - Syrup
   - SyrupUnrefined
   layers:
   - Default
