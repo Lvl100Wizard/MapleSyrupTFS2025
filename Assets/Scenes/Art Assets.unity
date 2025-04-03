@@ -122,63 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &77540699
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.08
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.015414879
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.9998812
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -178.234
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
-      propertyPath: m_Name
-      value: SugarShack_TFSGJ_Spring2025
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
 --- !u!1001 &98108387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -464,6 +407,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6196f9570bb2d3f47b3f7bcb7bd14051, type: 3}
+--- !u!1001 &542522250
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4212507
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.314133
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
+      propertyPath: m_Name
+      value: TaffyBox_TFSGJ_Spring2025
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
 --- !u!1001 &620956765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -683,6 +683,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 397a99421f943de48b09e365638b4de4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc2be54596b8a6e47a3de33cab9808f2, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 397a99421f943de48b09e365638b4de4, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f92e193478539a244809d1f73f2d2f4e, type: 2}
     - target: {fileID: 919132149155446097, guid: 397a99421f943de48b09e365638b4de4, type: 3}
       propertyPath: m_Name
       value: IceCreamBucketWLid_TFSGJ_Spring2025
@@ -692,63 +700,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 397a99421f943de48b09e365638b4de4, type: 3}
---- !u!1001 &985644454
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.5306797
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.987455
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
-      propertyPath: m_Name
-      value: TaffyBox_TFSGJ_Spring2025
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8e3740c84f49db942a9d8502122ceb5f, type: 3}
 --- !u!1001 &1311792855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1220,6 +1171,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52e415dd558713042bd2fc02458fd090, type: 3}
+--- !u!1001 &1446377684
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.07649267
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.9922776
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
+      propertyPath: m_Name
+      value: Sign_TFSGJ_Spring2025
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eecc97e12ecb5134caf8a9ac33afd215, type: 3}
 --- !u!1001 &1527035243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1505,6 +1513,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ca7060fc4c0ef34189345182e25816e, type: 3}
+--- !u!1001 &1725791841
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.31
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.21338606
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
+      propertyPath: m_Name
+      value: SugarShack_TFSGJ_Spring2025
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fd3afa122d031b24da626248cc5ad875, type: 3}
 --- !u!1001 &1789063805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2027,7 +2092,6 @@ SceneRoots:
   - {fileID: 1818570512}
   - {fileID: 1399588305}
   - {fileID: 2094666808}
-  - {fileID: 77540699}
   - {fileID: 815800066}
   - {fileID: 1383042420}
   - {fileID: 1955069655}
@@ -2048,9 +2112,11 @@ SceneRoots:
   - {fileID: 877592384}
   - {fileID: 2064066200}
   - {fileID: 793369192}
-  - {fileID: 985644454}
   - {fileID: 2002237245}
   - {fileID: 1716869464}
   - {fileID: 1921532122}
   - {fileID: 1360593834}
   - {fileID: 1527035243}
+  - {fileID: 1446377684}
+  - {fileID: 1725791841}
+  - {fileID: 542522250}
