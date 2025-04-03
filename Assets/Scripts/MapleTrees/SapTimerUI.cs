@@ -26,12 +26,16 @@ public class SapTimerUI : MonoBehaviour
         if (targetTransform != null)
         {
             UpdatePosition();
+          
         }
     }
+
+    
 
     void Update()
     {
 
+    
         UpdatePosition();
 
         //Timer update logic
