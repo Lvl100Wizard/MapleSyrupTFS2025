@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8470227282656671761}
+  - component: {fileID: 1153731672457325043}
+  - component: {fileID: 7296650334726414512}
   m_Layer: 0
   m_Name: BottlingStation
   m_TagString: Untagged
@@ -36,6 +38,46 @@ Transform:
   - {fileID: 316551781439310189}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1153731672457325043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2462977730679257195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf332ba2695e004e9c865a7ba33350c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structure: {fileID: 8470227282656671761}
+  buildTime: 1
+--- !u!114 &7296650334726414512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2462977730679257195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93a0293c9f1fb14cb65535938387014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isProducing: 0
+  hasOutput: 0
+  productionTime: 10
+  timerUIPrefab: {fileID: 6771584836555987216, guid: ac95a0698424a0340be6cbbf0843765a, type: 3}
+  dropOffRequirementUIPrefab: {fileID: 4332482053209563646, guid: 46d0fd43c3a36734e8e3c45abbc433ff, type: 3}
+  inputIcon: {fileID: 21300000, guid: 2889a4b27d43174419137ba791d366bf, type: 3}
+  normalInputTag: SyrupUnfiltered
+  premiumInputTag: SyrupFiltered
+  normalOutputPrefab: {fileID: 7355297012539378771, guid: d91b6d02a50bba541a927a4904c0a71b, type: 3}
+  premiumOutputPrefab: {fileID: 5257061049430377037, guid: 16b9af471749a084d92b90f40fe0e046, type: 3}
+  normalBottleMesh: {fileID: 5625833753911459152}
+  premiumBottleMesh: {fileID: 1454577981437178370}
+  pickupClip: {fileID: 8300000, guid: f391f4f26db59e646a83e828a61fa294, type: 3}
+  dropOffClip: {fileID: 8300000, guid: 7ea0fb0968db9604f80a954547840b60, type: 3}
 --- !u!1 &3739704526511399988
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6405778587808703170}
   - component: {fileID: 568295063228087427}
-  - component: {fileID: 3237563509227726774}
+  - component: {fileID: 3799045786478610859}
   m_Layer: 0
   m_Name: PickUpPoint
   m_TagString: Untagged
@@ -157,7 +199,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5795634, y: 1, z: 0.4725018}
   m_Center: {x: 0.008020878, y: 0, z: 0.2579094}
---- !u!114 &3237563509227726774
+--- !u!114 &3799045786478610859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,7 +208,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3913809099218562632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93484184813754c4fa1f094707104121, type: 3}
+  m_Script: {fileID: 11500000, guid: f8c4ac1baec98b842b8197ef8b02f1de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: 0
@@ -180,19 +222,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6196f9570bb2d3f47b3f7bcb7bd14051, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.49999997
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6196f9570bb2d3f47b3f7bcb7bd14051, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4999999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6196f9570bb2d3f47b3f7bcb7bd14051, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4999999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6196f9570bb2d3f47b3f7bcb7bd14051, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.124
+      value: -0.228
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6196f9570bb2d3f47b3f7bcb7bd14051, type: 3}
       propertyPath: m_LocalPosition.y
@@ -250,6 +292,11 @@ PrefabInstance:
 --- !u!4 &316551781439310189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6196f9570bb2d3f47b3f7bcb7bd14051, type: 3}
+  m_PrefabInstance: {fileID: 283207078955740806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1454577981437178370 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 6196f9570bb2d3f47b3f7bcb7bd14051, type: 3}
   m_PrefabInstance: {fileID: 283207078955740806}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &952122150333749488
@@ -869,15 +916,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 80186c9cf6baeb34ba88440fa4953f63, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.49999997
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 80186c9cf6baeb34ba88440fa4953f63, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4999999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 80186c9cf6baeb34ba88440fa4953f63, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4999999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 80186c9cf6baeb34ba88440fa4953f63, type: 3}
       propertyPath: m_LocalPosition.x
@@ -936,6 +983,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80186c9cf6baeb34ba88440fa4953f63, type: 3}
+--- !u!23 &5625833753911459152 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 80186c9cf6baeb34ba88440fa4953f63, type: 3}
+  m_PrefabInstance: {fileID: 6472636248260993492}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6798699457439630911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80186c9cf6baeb34ba88440fa4953f63, type: 3}

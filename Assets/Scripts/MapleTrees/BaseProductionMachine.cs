@@ -63,7 +63,7 @@ public abstract class BaseProductionMachine : MonoBehaviour, IDropOffHandler, IP
         dropOffUI.Initialize(transform, inputIcon, maxInputRequired);
     }
 
-    public void HandleDropOff(PlayerObjects playerInventory)
+    public virtual void HandleDropOff(PlayerObjects playerInventory)
     {
         if (isProducing || hasOutput) return;
 
