@@ -5,9 +5,15 @@ public class ItemTypes
     public enum Types //values here must match existing unity tags
     {
         Sap,
-        Taffee,
-        Syrup,
-        Bacon,
+        SyrupUnfiltered, 
+        SyrupFiltered, 
+        SyrupBottleUnfiltered,
+        SyrupBottleFiltered,
+        TaffyTray,
+        TaffyBox,
+        IceCreamBucket,
+        //SnowCandySingle,
+        //SnowCandyBox
     };
 
     public Types type;
