@@ -9,6 +9,7 @@ TagManager:
   - BoilerDropOffZone
   - BoilerPickUpZone
   - Sap
+  - SyrupUnrefined
   layers:
   - Default
   - TransparentFX
