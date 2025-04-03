@@ -1,3 +1,6 @@
+using System;
+using UnityEngine;
+
 public class ItemTypes
 {
 
@@ -30,5 +33,23 @@ public class ItemTypes
         return type;
     }
     #endregion
+
+    public Types GetRandomEnumValue()
+    {
+        Types[] values = (Types[])Enum.GetValues(typeof(Types));
+        return values[UnityEngine.Random.Range(0, values.Length)];
+    }
+
+    public string GetRandomEnumString()
+    {
+        Types[] values = (Types[])Enum.GetValues(typeof(Types));
+        return values[UnityEngine.Random.Range(0, values.Length)].ToString();
+    }
+
+    public Types GetRandomEnumKey()
+    {
+        Types[] values = (Types[])Enum.GetValues(typeof(Types));
+        return values[UnityEngine.Random.Range(0, values.Length)];
+    }
 
 }

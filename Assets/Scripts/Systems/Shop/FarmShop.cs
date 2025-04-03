@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
 {
@@ -6,13 +8,20 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
     //UI Prefabs
     public GameObject dropOffRequirementUIPrefab;
     [SerializeField] private ShopInventory inventory;
+    private ItemTypes shopItemTypes;
+    private ItemCosts priceList;
+    [SerializeField] float priceMultiplier = 1.0f;
     private DropOffRequirementUI dropOffUI;
     private int maxSyrupRequired = 100;
     private int currentSyrupCount = 0; 
     public string displaySyrupCount = "0";
-
+    [SerializeField] private int minCustomerItems = 0;
+    [SerializeField] private int maxCustomerItems = 10;
+    private int totalItemsInShop = 0; //tally of number of items in shop - required for npc pickup to work without infinite loops
+    private ItemTypes.Types itemToBuyKey;
+    private string itemToBuyStr;
     [SerializeField] private Wallet playerWallet;
-
+    public Dictionary<ItemTypes.Types, float> costDict = new Dictionary<ItemTypes.Types, float>();
     [Header("Item Requirement Icon")]
     public Sprite sapIcon; //Assign in the Inspector
 
@@ -20,6 +29,40 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
 
     private void Start()
     {
+        shopItemTypes = new ItemTypes();
+        priceList = new ItemCosts();
+
+        //hard code cost list for bug workaround
+        priceList.costDict[ItemTypes.Types.Sap] = 1f;
+        priceList.costDict[ItemTypes.Types.Sap] = 1f;
+        priceList.costDict[ItemTypes.Types.SyrupUnfiltered] = 6f;
+        priceList.costDict[ItemTypes.Types.SyrupFiltered] = 12f;
+        priceList.costDict[ItemTypes.Types.SyrupBottleUnfiltered] = 12f;
+        priceList.costDict[ItemTypes.Types.SyrupBottleFiltered] = 24f;
+        priceList.costDict[ItemTypes.Types.TaffyTray] = 8f;
+        priceList.costDict[ItemTypes.Types.TaffyBox] = 10f;
+        priceList.costDict[ItemTypes.Types.IceCreamBucket] = 25f;
+        
+        inventory.currentStockDict[ItemTypes.Types.Sap] = 0;
+        inventory.currentStockDict[ItemTypes.Types.SyrupUnfiltered] = 0;
+        inventory.currentStockDict[ItemTypes.Types.SyrupFiltered] = 0;
+        inventory.currentStockDict[ItemTypes.Types.SyrupBottleUnfiltered] = 0;
+        inventory.currentStockDict[ItemTypes.Types.SyrupBottleFiltered] = 0;
+        inventory.currentStockDict[ItemTypes.Types.TaffyTray] = 0;
+        inventory.currentStockDict[ItemTypes.Types.TaffyBox] = 0;
+        inventory.currentStockDict[ItemTypes.Types.IceCreamBucket] = 0;
+        //currentStockDict[ItemTypes.Types.SnowCandySingle] = 0;
+        //currentStockDict[ItemTypes.Types.SnowCandyBox] = 0;
+        //costDict[ItemTypes.Types.SnowCandySingle] = 1f;
+        //costDict[ItemTypes.Types.SnowCandyBox] = 1f;
+        foreach (ItemTypes.Types itemType in System.Enum.GetValues(typeof(ItemTypes.Types)))
+        {
+            //var numHeld = playerInventory.GetItemCountByTag(itemType.ToString());
+            //playerInventory.DropOffItems(numHeld, itemType.ToString(), this.transform);
+            inventory.currentStockDict[itemType] += 0;
+            UnityEngine.Debug.Log($"{itemType} start test at farm stand! Current inventory: {inventory.currentStockDict[itemType]}");
+        }
+
         mainCanvas = GameObject.FindObjectOfType<Canvas>();
         if (mainCanvas == null)
         {
@@ -48,40 +91,85 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
             return;
         }
 
-        int syrupHeld = playerInventory.GetItemCountByTag("Syrup");
-        UnityEngine.Debug.Log($"Player has {syrupHeld} syrup");
-        if (syrupHeld > 0)
+        //items to collect at this farm stand
+        /*
+            Sap,
+            SyrupUnfiltered, 
+            SyrupFiltered, 
+            SyrupBottleUnfiltered,
+            SyrupBottleFiltered,
+            TaffyTray,
+            TaffyBox,
+            IceCreamBucket,
+        */
+        foreach (ItemTypes.Types itemType in System.Enum.GetValues(typeof(ItemTypes.Types)))
         {
-            playerInventory.DropOffItems(syrupHeld, "Syrup", this.transform);
-            currentSyrupCount += syrupHeld;
-            inventory.currentStockDict[ItemTypes.Types.SyrupUnfiltered] += syrupHeld;
-            
-
-            UnityEngine.Debug.Log($"Syrup dropped off at farm stand! Current count: {currentSyrupCount}");
-            UnityEngine.Debug.Log($"Syrup dropped off at farm stand! Current inventory: {inventory.currentStockDict[ItemTypes.Types.SyrupUnfiltered]}");
-
-            // Update Drop-Off UI
-            //dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
-            displaySyrupCount = currentSyrupCount.ToString();
-
+            var numHeld = playerInventory.GetItemCountByTag(itemType.ToString());
+            if (numHeld > 0)
+            {
+                playerInventory.DropOffItems(numHeld, itemType.ToString(), this.transform);
+                inventory.currentStockDict[itemType] += numHeld;
+                UnityEngine.Debug.Log($"{itemType} dropped off at farm stand! Current inventory: {inventory.currentStockDict[itemType]}");
+            }
+            else
+            {
+                UnityEngine.Debug.Log($"No {itemType} to drop off!");
+            }
         }
-        else
-        {
-            UnityEngine.Debug.Log("No syrup to drop off!");
-        }
+
     }
+
     /* TODO: update to handle NPC pickups */
     public void HandlePickup()
     {
-        UnityEngine.Debug.Log("NPC came to pick up syrup!");
-        if (currentSyrupCount > 0)
+        UnityEngine.Debug.Log($"thing {inventory.currentStockDict[ItemTypes.Types.Sap]}");
+        //NPC will roll the number of items they want between min/max       
+        int itemsWanted = UnityEngine.Random.Range(minCustomerItems, maxCustomerItems); // Generates a number between 1 and 9
+        UnityEngine.Debug.Log($"NPC came to pick up {minCustomerItems}!");
+
+        //iterate over the number of items they want
+        for(int i=0; i < itemsWanted; i++)
         {
-            UnityEngine.Debug.Log("NPC picked up syrup!");
-            currentSyrupCount--;
-            displaySyrupCount = currentSyrupCount.ToString();
-            playerWallet.GetMoney(20.0f);
-            UnityEngine.Debug.Log($"player wallet contains {playerWallet.Money}");
+            //pick a random item
+            //ItemTypes.Types itemType in System.Enum.GetValues(typeof(ItemTypes.Types))
+
+            itemToBuyKey = shopItemTypes.GetRandomEnumKey();
+            //itemToBuyStr = itemToBuyKey.ToString();
+
+            ItemTypes.Types enumFromValue = (ItemTypes.Types)itemToBuyKey;
+
+            UnityEngine.Debug.Log($"NPC wants a {itemToBuyKey}!");
+
+
+            //if it's not in stock check for a different item
+            if (inventory.currentStockDict[itemToBuyKey] == 0)
+            {
+                UnityEngine.Debug.Log($"NPC wants a {itemToBuyStr}: none in stock!");
+                itemToBuyKey = shopItemTypes.GetRandomEnumKey();
+                UnityEngine.Debug.Log($"NPC will try a {itemToBuyStr} instead if it's in stock but will give up if it's not and move on to their next wanted item!");
+            }
+            
+            //if there is stock buy one, but if not we only check once for an alternate and then keep moving, odd but that's the logic for now
+            if (inventory.currentStockDict[itemToBuyKey] > 0)
+            {                
+                inventory.currentStockDict[itemToBuyKey] -= 1;
+                float payment = priceList.costDict[itemToBuyKey] * priceMultiplier;
+                UnityEngine.Debug.Log($"NPC buys a {itemToBuyKey} for {payment} beaver bucks!");
+                playerWallet.GetMoney(payment);
+            }            
+            //iterate items wanted whether the npc got what they wanted or not
+
+            //TODO: may wish to have items wanted progress over the course of the game in the future
         }
     }
 
+    private void UpdateTotalItems()
+    {
+        var totalItemsCounted = 0;
+        foreach (ItemTypes.Types itemType in System.Enum.GetValues(typeof(ItemTypes.Types)))
+        {
+            totalItemsCounted += inventory.currentStockDict[itemType];
+        }
+        totalItemsInShop = totalItemsCounted;
+    }
 }
