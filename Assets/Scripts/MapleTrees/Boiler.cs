@@ -20,6 +20,8 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
 
     //Syrup Prefab
     public GameObject syrupPrefab;
+    public MeshRenderer bucketMesh;
+
 
     private SapTimerUI timerUI;
     private DropOffRequirementUI dropOffUI;
@@ -127,6 +129,8 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             // Reset the Drop-Off UI and make it visible again
             dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
             dropOffUI.SetVisible(true); // Show UI again
+            bucketMesh.enabled = false;
+
         }
     }
 
@@ -141,6 +145,10 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
     {
         isProducing = false;
         hasSyrup = true;
+            
+        //toggling visual bucket when ready for collection
+        bucketMesh.enabled = true;
+
         timerUI.SetCheckmarkVisibility(true);
         Debug.Log("Syrup is ready for pickup!");
     }
