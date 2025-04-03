@@ -42,22 +42,25 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
         priceList.costDict[ItemTypes.Types.TaffyTray] = 8f;
         priceList.costDict[ItemTypes.Types.TaffyBox] = 10f;
         priceList.costDict[ItemTypes.Types.IceCreamBucket] = 25f;
+        
+        inventory.currentStockDict[ItemTypes.Types.Sap] = 0;
+        inventory.currentStockDict[ItemTypes.Types.SyrupUnfiltered] = 0;
+        inventory.currentStockDict[ItemTypes.Types.SyrupFiltered] = 0;
+        inventory.currentStockDict[ItemTypes.Types.SyrupBottleUnfiltered] = 0;
+        inventory.currentStockDict[ItemTypes.Types.SyrupBottleFiltered] = 0;
+        inventory.currentStockDict[ItemTypes.Types.TaffyTray] = 0;
+        inventory.currentStockDict[ItemTypes.Types.TaffyBox] = 0;
+        inventory.currentStockDict[ItemTypes.Types.IceCreamBucket] = 0;
+        //currentStockDict[ItemTypes.Types.SnowCandySingle] = 0;
+        //currentStockDict[ItemTypes.Types.SnowCandyBox] = 0;
         //costDict[ItemTypes.Types.SnowCandySingle] = 1f;
         //costDict[ItemTypes.Types.SnowCandyBox] = 1f;
-
-        //init stock
-        UnityEngine.Debug.Log("are we here stock check");
-        foreach (KeyValuePair<ItemTypes.Types, float> entry in priceList.costDict)
+        foreach (ItemTypes.Types itemType in System.Enum.GetValues(typeof(ItemTypes.Types)))
         {
-            // Store the key in the itemKeys list
-            //itemKeys.Add(entry.Key);
-            UnityEngine.Debug.Log(entry.Key);
-        }
-
-        foreach (KeyValuePair<ItemTypes.Types, float> entry in priceList.costDict)
-        {
-            UnityEngine.Debug.Log("are we here");
-            UnityEngine.Debug.Log($"Item: {entry.Key}, Cost: {entry.Value}");
+            //var numHeld = playerInventory.GetItemCountByTag(itemType.ToString());
+            //playerInventory.DropOffItems(numHeld, itemType.ToString(), this.transform);
+            inventory.currentStockDict[itemType] += 0;
+            UnityEngine.Debug.Log($"{itemType} start test at farm stand! Current inventory: {inventory.currentStockDict[itemType]}");
         }
 
         mainCanvas = GameObject.FindObjectOfType<Canvas>();
@@ -119,6 +122,7 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
     /* TODO: update to handle NPC pickups */
     public void HandlePickup()
     {
+        UnityEngine.Debug.Log($"thing {inventory.currentStockDict[ItemTypes.Types.Sap]}");
         //NPC will roll the number of items they want between min/max       
         int itemsWanted = UnityEngine.Random.Range(minCustomerItems, maxCustomerItems); // Generates a number between 1 and 9
         UnityEngine.Debug.Log($"NPC came to pick up {minCustomerItems}!");
@@ -130,8 +134,9 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
             //ItemTypes.Types itemType in System.Enum.GetValues(typeof(ItemTypes.Types))
 
             itemToBuyKey = shopItemTypes.GetRandomEnumKey();
-            itemToBuyStr = itemToBuyKey.ToString();
-            //Types enumFromValue = (Types)value;
+            //itemToBuyStr = itemToBuyKey.ToString();
+
+            ItemTypes.Types enumFromValue = (ItemTypes.Types)itemToBuyKey;
 
             UnityEngine.Debug.Log($"NPC wants a {itemToBuyKey}!");
 
