@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerObjects : MonoBehaviour
 {
     [SerializeField] public Transform holdPoint;
-    [SerializeField] public float stackHeight = 0.5f; //spacing between items on stack
-    private Wallet wallet;
+    [SerializeField] public float stackHeight = 0.5f; //spacing between items on stack    
 
     public float pickupSpeed = 0.5f; // How fast items move to the stack
 
