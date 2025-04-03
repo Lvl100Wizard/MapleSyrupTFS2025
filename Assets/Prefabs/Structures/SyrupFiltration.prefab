@@ -77,7 +77,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3197828611872303872}
   - component: {fileID: 2481290390711753102}
-  - component: {fileID: 7637243420191503609}
+  - component: {fileID: 5384998245082289318}
   m_Layer: 0
   m_Name: PickUpPoint
   m_TagString: Untagged
@@ -119,9 +119,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5981951, y: 1, z: 0.9941603}
-  m_Center: {x: -0.20090246, y: 0, z: -0.0029198527}
---- !u!114 &7637243420191503609
+  m_Size: {x: 0.9054022, y: 1, z: 0.9941603}
+  m_Center: {x: -0.04729891, y: 0, z: -0.0029198527}
+--- !u!114 &5384998245082289318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2427304947404766273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93484184813754c4fa1f094707104121, type: 3}
+  m_Script: {fileID: 11500000, guid: f8c4ac1baec98b842b8197ef8b02f1de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: 0
@@ -143,6 +143,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4081011942745564493}
+  - component: {fileID: 2439236442707806171}
+  - component: {fileID: 3757219676907099165}
   m_Layer: 0
   m_Name: SyrupFiltration
   m_TagString: Untagged
@@ -169,6 +171,42 @@ Transform:
   - {fileID: 7047649899250545941}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2439236442707806171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5799925484100235007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf332ba2695e004e9c865a7ba33350c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structure: {fileID: 4081011942745564493}
+  buildTime: 0.5
+--- !u!114 &3757219676907099165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5799925484100235007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ead6c2077768847b0ac8ac53806b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isProducing: 0
+  hasOutput: 0
+  productionTime: 2
+  timerUIPrefab: {fileID: 6771584836555987216, guid: ac95a0698424a0340be6cbbf0843765a, type: 3}
+  dropOffRequirementUIPrefab: {fileID: 4332482053209563646, guid: 46d0fd43c3a36734e8e3c45abbc433ff, type: 3}
+  inputIcon: {fileID: 21300000, guid: 2889a4b27d43174419137ba791d366bf, type: 3}
+  dropOffClip: {fileID: 8300000, guid: f391f4f26db59e646a83e828a61fa294, type: 3}
+  pickupClip: {fileID: 8300000, guid: 7ea0fb0968db9604f80a954547840b60, type: 3}
+  filteredSyrupMesh: {fileID: 8180055223876357754}
+  FilteredSyrupPrefab: {fileID: 7683366914493356486, guid: f12311b11095e94438de2f1640d61be8, type: 3}
 --- !u!1001 &5900561907177410948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -364,6 +402,11 @@ PrefabInstance:
 --- !u!4 &7047649899250545941 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0c72568fb5575934dbe43faf48ee3f1e, type: 3}
+  m_PrefabInstance: {fileID: 7369280161232458494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8180055223876357754 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 0c72568fb5575934dbe43faf48ee3f1e, type: 3}
   m_PrefabInstance: {fileID: 7369280161232458494}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9151518922709682228
