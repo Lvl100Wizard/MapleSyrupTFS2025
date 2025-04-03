@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 9185097050687463625}
   - component: {fileID: 3515309874251043676}
   - component: {fileID: 1569367954461923599}
+  - component: {fileID: 3911913442680961825}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -305,6 +306,25 @@ MonoBehaviour:
   holdPoint: {fileID: 4872796987937330070}
   stackHeight: 0.5
   pickupSpeed: 0.5
+--- !u!114 &3911913442680961825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862600482228170496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d92c97bbd908884cb53c0ab056aab91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5838641869455740683}
+  movehold: {fileID: 9100000, guid: d6e315fcfea060b448e66735379031fd, type: 2}
+  standhold: {fileID: 9100000, guid: 71f49a28009523143b427b86e8c9662c, type: 2}
+  stand: {fileID: 9100000, guid: 9d7c2c48a6a16cc4f9e96249a52893cf, type: 2}
+  move: {fileID: 9100000, guid: 290f5501155f71a47bb43915175b40dc, type: 2}
+  pc: {fileID: 3515309874251043676}
+  po: {fileID: 1569367954461923599}
 --- !u!1001 &4506700706382384689
 PrefabInstance:
   m_ObjectHideFlags: 0

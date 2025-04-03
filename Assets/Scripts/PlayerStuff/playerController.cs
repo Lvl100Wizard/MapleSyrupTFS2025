@@ -81,4 +81,9 @@ public class playerController : MonoBehaviour
 
     }
 
+    public bool IsMoving()
+    {
+        if (_input == Vector3.zero) return false; else return true;
+    }
+
 }
