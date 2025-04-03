@@ -112,4 +112,9 @@ public class SapTimerUI : MonoBehaviour
             checkmarkImage.gameObject.SetActive(show);
         }
     }
+
+    public void SetUIVisibility(bool isVisible)
+    {
+        gameObject.SetActive(isVisible);
+    }
 }

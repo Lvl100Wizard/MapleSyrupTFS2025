@@ -20,8 +20,6 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
 
     //Syrup Prefab
     public GameObject syrupPrefab;
-    public MeshRenderer bucketMesh;
-
 
     private SapTimerUI timerUI;
     private DropOffRequirementUI dropOffUI;
@@ -57,6 +55,7 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             return;
         }
         timerUI.Initialize(this.transform, isProducing);
+        timerUI.SetUIVisibility(false);
 
         //Instantiate Drop-Off UI
         GameObject dropOffUIObject = Instantiate(dropOffRequirementUIPrefab, gameUIPanelTransform);
@@ -91,19 +90,24 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             playerInventory.DropOffItems(sapToDeposit, "Sap", this.transform);
             currentSapCount += sapToDeposit;
 
-            //Play SoundFX
+            // Play SoundFX
             SoundFXManager.instance.PlaySoundFXClip(dropOffClip, transform, 1f);
             Debug.Log($"Sap added! Current count: {currentSapCount}/{maxSapRequired}");
 
             // Update Drop-Off UI
             dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
 
-            // Hide Drop-Off UI when requirement is met
+            // Hide Drop-Off UI and show Timer UI when requirement is met
             if (currentSapCount >= maxSapRequired)
             {
                 Debug.Log("Boiler fueled! Starting production.");
                 StartProduction();
-                dropOffUI.SetVisible(false); // Hide UI
+                dropOffUI.SetVisible(false); // Hide Drop-Off UI
+                timerUI.SetUIVisibility(true); // Show Timer UI
+            }
+            else
+            {
+                timerUI.SetUIVisibility(false); // Hide Timer UI when waiting for sap
             }
         }
         else
@@ -124,19 +128,19 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
             currentSapCount = 0;
 
             timerUI.SetCheckmarkVisibility(false);
+            timerUI.SetUIVisibility(false);
             timerUI.SetSliderValue(0f);
 
             // Reset the Drop-Off UI and make it visible again
             dropOffUI.UpdateDropOffProgress(currentSapCount, maxSapRequired);
             dropOffUI.SetVisible(true); // Show UI again
-            bucketMesh.enabled = false;
-
         }
     }
 
     private void StartProduction()
     {
         isProducing = true;
+        timerUI.SetUIVisibility(true); // Show Timer UI when production starts
         timerUI.SetCheckmarkVisibility(false);
         timerUI.StartCooldown(productionTime, FinishProduction);
     }
@@ -145,10 +149,6 @@ public class Boiler : MonoBehaviour, IDropOffHandler, IPickUpHandler
     {
         isProducing = false;
         hasSyrup = true;
-            
-        //toggling visual bucket when ready for collection
-        bucketMesh.enabled = true;
-
         timerUI.SetCheckmarkVisibility(true);
         Debug.Log("Syrup is ready for pickup!");
     }
