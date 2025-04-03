@@ -153,7 +153,7 @@ public class MenuController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("AidenTestScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void OpenPanel(GameObject panelToOpen)
