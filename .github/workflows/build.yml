@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Enable debug logging
+        run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -22,48 +25,31 @@ jobs:
           restore-keys: |
             Library-${{ runner.os }}-
 
-		- name: Enable debug logging
-		  run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
-  
-      - name: Set up Unity
-        uses: game-ci/unity-builder@v4
-        with:
-          unityVersion: 2022.3.49f1
-          targetPlatform: StandaloneWindows64
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}  # Ensure the license file is passed to Unity
-
-      - name: Activate Unity License
-        run: |
-          echo "${{ secrets.UNITY_LICENSE }}" > unity_lic.ulf  # Write the license secret to a temporary file
-          /opt/Unity/Editor/Unity -batchmode -nographics -silent-crashes -logFile -activateUserLicense unity_lic.ulf  # Activate Unity license
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}  # Pass the Unity license secret to the step
-
       - name: Build Unity Project
         uses: game-ci/unity-builder@v4
         with:
           unityVersion: 2022.3.49f1
           targetPlatform: StandaloneWindows64
+          buildPath: remote-builds/StandaloneWindows64
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}  # Ensure the license file is passed to Unity
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
       - name: Check Build Output Directory
         run: |
           echo "Listing contents of remote-builds directory"
-          ls -al remote-builds  # Ensure that remote-builds/ exists and contains the expected directories
-          ls -al remote-builds/StandaloneWindows64  # Check the specific output folder
+          ls -al remote-builds
+          ls -al remote-builds/StandaloneWindows64
 
       - name: Upload Build Artifact (v4)
         uses: actions/upload-artifact@v4
         with:
           name: Build
-          path: remote-builds/StandaloneWindows64  # Path to the build output
+          path: remote-builds/StandaloneWindows64
 
   deploy:
     name: Deploy to Itch.io
     runs-on: ubuntu-latest
-    needs: build  # Ensure deploy happens only after build is successful
+    needs: build
 
     steps:
       - name: Checkout repository
@@ -72,8 +58,8 @@ jobs:
       - name: Download Build Artifact (v4)
         uses: actions/download-artifact@v4
         with:
-          name: Build  # Artifact name from the previous job
-          path: remote-builds/  # Directory to store the downloaded artifact
+          name: Build
+          path: remote-builds/
 
       - name: Install Butler
         run: |
