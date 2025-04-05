@@ -44,7 +44,7 @@ jobs:
   deploy:
     name: Deploy to Itch.io
     runs-on: ubuntu-latest
-    needs: build  # ✅ Wait for build job to complete
+    needs: build  # Wait for build job to complete
 
     steps:
       - name: Download Build Artifact
@@ -53,12 +53,13 @@ jobs:
           name: Build
           path: build/StandaloneWindows64
 
-      - name: Deploy to Itch.io using itch-io-publish
-        uses: dictybase/itch-io-publish@v1
+      - name: Deploy to Itch.io
+        uses: KikimoraGames/itch-publish@v0.0.3
         with:
-          itch_username: ${{ secrets.ITCH_USERNAME }}
-          itch_game: ${{ secrets.ITCH_GAME }}
-          itch_channel: ${{ secrets.ITCH_CHANNEL }}
-          build_path: build/StandaloneWindows64
+          butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
+          gameData: build/StandaloneWindows64
+          itchUsername: ${{ secrets.ITCH_USERNAME }}
+          itchGameId: ${{ secrets.ITCH_GAME }}
+          buildChannel: windows
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
