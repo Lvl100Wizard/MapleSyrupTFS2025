@@ -41,10 +41,10 @@ jobs:
           name: Build
           path: build/StandaloneWindows64
 
-deploy:
+  deploy:
     name: Deploy to Itch.io
     runs-on: ubuntu-latest
-    needs: build  # Wait for build job to complete
+    needs: build  # ✅ Wait for build job to complete
 
     steps:
       - name: Download Build Artifact
