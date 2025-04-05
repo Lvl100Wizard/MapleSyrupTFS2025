@@ -1,11 +1,9 @@
-name: Unity Build and Deploy
+name: Unity Build and Deploy to Itch.io
 
 on:
   push:
     branches:
       - entropy-test-branch  # Trigger on pushes to the "entropy-test-branch" branch
-
-name: Unity Build and Deploy to Itch.io
 
 jobs:
   build:
