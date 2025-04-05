@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: -0.5, z: 0}
+  m_Size: {x: 1.7558281, y: 1, z: 2.583519}
+  m_Center: {x: -0.17867625, y: -0.5, z: 0.18016577}
 --- !u!114 &6264739418901529786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c4ac1baec98b842b8197ef8b02f1de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: 0
 --- !u!1 &2943495585636308200
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,11 +117,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canTap: 1
-  tapCooldown: 10
+  tapCooldown: 1
   pickupClip: {fileID: 8300000, guid: a2ec4f980724985448ea2a24562a7778, type: 3}
   timerUIPrefab: {fileID: 6771584836555987216, guid: ac95a0698424a0340be6cbbf0843765a, type: 3}
   sapPail: {fileID: 5410637208385230914, guid: c6ea1d2085850da459d158c5a656fd83, type: 3}
   bucketMesh: {fileID: 1304411181714115300}
+  timerUI: {fileID: 0}
 --- !u!114 &-4189989932177820381
 MonoBehaviour:
   m_ObjectHideFlags: 0
