@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6857a9ab7f0ba0e4c8554b199aa059df, type: 3}
+  m_Name: Order_10
+  m_EditorClassIdentifier: 
+  requiredItems:
+  - itemTag: SyrupBottleFiltered
+    requiredAmount: 6
+    icon: {fileID: 21300000, guid: b579a68a3a2ff354789d63a08ce29928, type: 3}
+  - itemTag: IceCreamBucket
+    requiredAmount: 6
+    icon: {fileID: 21300000, guid: 92ba9828e7c677a4f9eb1464e8eff1ef, type: 3}
+  - itemTag: TaffyBox
+    requiredAmount: 3
+    icon: {fileID: 21300000, guid: 9971b1b107e379742ba28414c2aabe36, type: 3}

@@ -8,6 +8,8 @@ public class playerController : MonoBehaviour
    [SerializeField] private Rigidbody rb;
     [SerializeField] private float turnSpeed = 360;
 
+
+    
     private Vector3 _input;
 
 
@@ -40,12 +42,17 @@ public class playerController : MonoBehaviour
     void Look()
     {
 
+        //rotate 45 to account for camera rotation
+        var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+
+        var skewedInput = matrix.MultiplyPoint3x4(_input);
+
         //this prevents snapping to the default angle
         if (_input == Vector3.zero) return;
 
 
         //basically rotating the player model based on input so they can travel in that direction
-        var relative = (transform.position + _input) - transform.position;
+        var relative = (transform.position + skewedInput) - transform.position;
         var rot = Quaternion.LookRotation(relative, Vector3.up);
 
 
@@ -58,6 +65,25 @@ public class playerController : MonoBehaviour
 
         //move character in forward direction based on rotation and if input is present
         rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * moveSpeed * Time.deltaTime);
+
+
+        if (_input.magnitude > 0)
+        {
+            //player is moving
+
+
+        }else
+        {
+            //player is not moving
+
+
+        }
+
+    }
+
+    public bool IsMoving()
+    {
+        if (_input == Vector3.zero) return false; else return true;
     }
 
 }

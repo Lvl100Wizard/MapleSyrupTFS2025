@@ -3,12 +3,28 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MapleTree
+  - Boiler
+  - BoilerDropOffZone
+  - BoilerPickUpZone
+  - Sap
+  - NpcIndividual
+  - NpcFederalReserve
+  - NpcBusiness
+  - Syrup
+  - SyrupFiltered
+  - IceCreamBucket
+  - TaffyBox
+  - TaffyTray
+  - SyrupBottleFiltered
+  - SyrupBottleUnfiltered
+  - SyrupUnfiltered
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacle
   - Water
   - UI
   - 
