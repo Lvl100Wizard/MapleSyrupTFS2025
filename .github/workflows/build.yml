@@ -5,9 +5,11 @@ on:
     branches:
       - entropy-test-branch  # Trigger on pushes to the "entropy-test-branch" branch
 
+name: Unity Build and Deploy to Itch.io
+
 jobs:
   build:
-    name: Build for Windows
+    name: Build Unity Project
     runs-on: ubuntu-latest
 
     steps:
@@ -25,26 +27,19 @@ jobs:
           restore-keys: |
             Library-${{ runner.os }}-
 
-      - name: Build Unity Project
+      - name: Build with Unity
         uses: game-ci/unity-builder@v4
         with:
           unityVersion: 2022.3.49f1
           targetPlatform: StandaloneWindows64
-          buildPath: remote-builds/StandaloneWindows64
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
-      - name: Check Build Output Directory
-        run: |
-          echo "Listing contents of remote-builds directory"
-          ls -al remote-builds
-          ls -al remote-builds/StandaloneWindows64
-
-      - name: Upload Build Artifact (v4)
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Build
-          path: remote-builds/StandaloneWindows64
+          path: build/StandaloneWindows64
 
   deploy:
     name: Deploy to Itch.io
@@ -55,11 +50,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download Build Artifact (v4)
+      - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
           name: Build
-          path: remote-builds/
+          path: build/StandaloneWindows64
 
       - name: Install Butler
         run: |
@@ -73,8 +68,8 @@ jobs:
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
-      - name: Deploy to Itch.io
+      - name: Push to Itch.io
         run: |
-          butler push remote-builds/StandaloneWindows64 ${{ secrets.ITCH_USERNAME }}/${{ secrets.ITCH_GAME }}:${{ secrets.ITCH_CHANNEL }}
+          butler push build/StandaloneWindows64 ${{ secrets.ITCH_USERNAME }}/${{ secrets.ITCH_GAME }}:${{ secrets.ITCH_CHANNEL }}
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
