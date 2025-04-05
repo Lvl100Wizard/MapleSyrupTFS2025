@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 2486434382750394019}
   - component: {fileID: 398292153139339165}
   - component: {fileID: 3383901627179764035}
+  - component: {fileID: 2204934951727783774}
   m_Layer: 0
   m_Name: SnowGlobe
   m_TagString: Untagged
@@ -5081,6 +5082,20 @@ MonoBehaviour:
   pickupClip: {fileID: 8300000, guid: 7ea0fb0968db9604f80a954547840b60, type: 3}
   trayMesh: {fileID: 8411804071864006154}
   TaffyTrayPrefab: {fileID: 6840964509407533155, guid: 3b0bcdac0f413444abe6a9393b8977a9, type: 3}
+--- !u!114 &2204934951727783774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3730452334100206875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf332ba2695e004e9c865a7ba33350c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structure: {fileID: 1582361818604223340}
+  buildTime: 1
 --- !u!1 &4467140274555815565
 GameObject:
   m_ObjectHideFlags: 0
@@ -5238,8 +5253,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.4680045, y: 1, z: 2.2090373}
+  m_Center: {x: -0.17660058, y: 0, z: -0.6045191}
 --- !u!114 &3246396984798042739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5410,8 +5425,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.811191, y: 1, z: 2.351327}
+  m_Center: {x: -0.40559545, y: 0, z: -0.6756649}
 --- !u!114 &1753811240554765364
 MonoBehaviour:
   m_ObjectHideFlags: 0
