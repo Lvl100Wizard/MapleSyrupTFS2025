@@ -556,6 +556,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1726071359378141079}
     m_Modifications:
+    - target: {fileID: 147500802030078216, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
+      propertyPath: m_Size.x
+      value: 2.053073
+      objectReference: {fileID: 0}
+    - target: {fileID: 147500802030078216, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
+      propertyPath: m_Size.z
+      value: 1.7400494
+      objectReference: {fileID: 0}
+    - target: {fileID: 147500802030078216, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
+      propertyPath: m_Center.x
+      value: 0.1610322
+      objectReference: {fileID: 0}
+    - target: {fileID: 147500802030078216, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
+      propertyPath: m_Center.z
+      value: -0.1521244
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457711116602847887, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.3477602
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457711116602847887, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
+      propertyPath: m_Size.z
+      value: 1.3818212
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457711116602847887, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
+      propertyPath: m_Center.x
+      value: -0.1738801
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457711116602847887, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
+      propertyPath: m_Center.z
+      value: -0.19091058
+      objectReference: {fileID: 0}
     - target: {fileID: 2376659051953245383, guid: 22fcc08e482c49f4d9c7dfb04cbd4b4b, type: 3}
       propertyPath: m_Name
       value: Boiler
