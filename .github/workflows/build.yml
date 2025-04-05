@@ -23,7 +23,7 @@ jobs:
             Library-${{ runner.os }}-
 
       - name: Set up Unity
-        uses: game-ci/unity-builder@v3
+        uses: game-ci/unity-builder@v4
         with:
           unityVersion: 2022.3.0f1
           targetPlatform: StandaloneWindows64
@@ -38,7 +38,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}  # Pass the Unity license secret to the step
 
       - name: Build Unity Project
-        uses: game-ci/unity-builder@v3
+        uses: game-ci/unity-builder@v4
         with:
           unityVersion: 2022.3.0f1
           targetPlatform: StandaloneWindows64
