@@ -2379,6 +2379,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4591134249057157122, guid: 79ad251431714504e9169eb4b56fa55f, type: 3}
   m_PrefabInstance: {fileID: 578523404}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &429991598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429991600}
+  - component: {fileID: 429991599}
+  m_Layer: 0
+  m_Name: PauseMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &429991599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429991598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7937a7f851aec29448d773f16189dc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 1542213487}
+  resumeButton: {fileID: 1630448916}
+  mainMenuButton: {fileID: 1972314442}
+  quitButton: {fileID: 1177812447}
+  blurOverlay: {fileID: 809198297}
+  blurMaterial: {fileID: 2100000, guid: 786e6432ab7d8cc4b97d83d8a3f4d823, type: 2}
+  blurIntensity: 4
+  blurAnimationSpeed: 10
+--- !u!4 &429991600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429991598}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.7574835, y: -0.5317364, z: -0.8316262}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &437497153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10611,7 +10663,6 @@ GameObject:
   - component: {fileID: 1684896414}
   - component: {fileID: 1684896416}
   - component: {fileID: 1684896418}
-  - component: {fileID: 1684896419}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -10685,26 +10736,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 381f3cdcdfe30444aba30f38fb3c3a17, type: 2}
   - {fileID: 11400000, guid: 836683c72b32011448dfa53bd82b6c5e, type: 2}
   - {fileID: 11400000, guid: 5b97a005e7d60df488ab159bf6beb9a5, type: 2}
---- !u!114 &1684896419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684896413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7937a7f851aec29448d773f16189dc7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pausePanel: {fileID: 1542213487}
-  resumeButton: {fileID: 1630448916}
-  mainMenuButton: {fileID: 1972314442}
-  quitButton: {fileID: 1177812447}
-  blurOverlay: {fileID: 809198297}
-  blurMaterial: {fileID: 2100000, guid: 786e6432ab7d8cc4b97d83d8a3f4d823, type: 2}
-  blurIntensity: 4
-  blurAnimationSpeed: 10
 --- !u!1001 &1692157525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13742,3 +13773,4 @@ SceneRoots:
   - {fileID: 1336516306}
   - {fileID: 1498895013}
   - {fileID: 1346225486}
+  - {fileID: 429991600}
