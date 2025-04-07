@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7839829661616549458}
   - component: {fileID: 9044233831248422641}
-  - component: {fileID: 4663623257499302367}
+  - component: {fileID: 6627586472499949742}
   m_Layer: 0
   m_Name: NPCPickUpPoint
   m_TagString: BoilerPickUpZone
@@ -122,7 +122,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.4746866, y: 1, z: 2.5214252}
   m_Center: {x: 0.2462306, y: 0, z: 0.32152843}
---- !u!114 &4663623257499302367
+--- !u!114 &6627586472499949742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5304821613961514348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8c4ac1baec98b842b8197ef8b02f1de, type: 3}
+  m_Script: {fileID: 11500000, guid: 252520323e7b6894da2c60e0dd1d8cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: 1
@@ -184,8 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropOffRequirementUIPrefab: {fileID: 7683366914493356486, guid: f12311b11095e94438de2f1640d61be8, type: 3}
   inventory: {fileID: 11400000, guid: cf610e6285113c24a90f98f8e038e444, type: 2}
+  inventoryPartDeux: {fileID: 11400000, guid: a6514d000948b334d87d6e47ddecf986, type: 2}
   priceMultiplier: 1
-  displaySyrupCount: 0
   minCustomerItems: 0
   maxCustomerItems: 10
   playerWallet: {fileID: 11400000, guid: 309290bc72b419546851791513317d91, type: 2}

@@ -5,56 +5,69 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ShopInventory", order = 1)]
 public class ShopInventory : AbstractSOContainer
 {
-    public Dictionary<ItemTypes.Types, int> currentStockDict = new Dictionary<ItemTypes.Types, int>();
+    public Dictionary<ItemTypes.Types, int> inventoryDict;
 
-    #region variables
-    private GenericItem sap;
-    private GenericItem syrupUnfiltered;
-    private GenericItem syrupFiltered;
-    private GenericItem syrupBottleUnfiltered;
-    private GenericItem syrupBottleFiltered;
-    private GenericItem taffyTray;
-    private GenericItem taffyBox;
-    private GenericItem iceCreamBucket;
-    //private GenericItem snowCandySingle;
-    //private GenericItem snowCandyBox;
-    #endregion
-
-    #region Built-in Functions
-    public void Start()
+    public void Initialize()
     {
-        InitShopItems();
-        InitShopStock();
+        if (inventoryDict == null)
+        {
+            inventoryDict = new Dictionary<ItemTypes.Types, int>();
+        }
     }
-    #endregion
+    
+    public void SetQuantity(ItemTypes.Types itemType, int quantity)
+    {        
+        if (inventoryDict == null)
+        {
+            Initialize();
+        }
 
-    #region Custom Functions
-    public void InitShopItems()
-    {
-        sap.Type = ItemTypes.Types.Sap;
-        syrupUnfiltered.Type = ItemTypes.Types.SyrupUnfiltered;
-        syrupFiltered.Type = ItemTypes.Types.SyrupFiltered;
-        syrupBottleUnfiltered.Type = ItemTypes.Types.SyrupBottleUnfiltered;
-        syrupBottleFiltered.Type = ItemTypes.Types.SyrupBottleFiltered;
-        taffyTray.Type = ItemTypes.Types.TaffyTray;
-        taffyBox.Type = ItemTypes.Types.TaffyBox;
-        iceCreamBucket.Type = ItemTypes.Types.IceCreamBucket;
-        //snowCandySingle.Type = ItemTypes.Types.SnowCandySingle;
-        //snowCandyBox.Type = ItemTypes.Types.SnowCandyBox;
+        if (inventoryDict.ContainsKey(itemType))
+        {
+            inventoryDict[itemType] = quantity;
+        }
+        else
+        {
+            inventoryDict.Add(itemType, quantity);
+        }
     }
 
-    public void InitShopStock()
+    public void ModifyQuantity(ItemTypes.Types itemType, int quantityChange)
     {
-        currentStockDict[ItemTypes.Types.Sap] = 0;
-        currentStockDict[ItemTypes.Types.SyrupUnfiltered] = 0;
-        currentStockDict[ItemTypes.Types.SyrupFiltered] = 0;
-        currentStockDict[ItemTypes.Types.SyrupBottleUnfiltered] = 0;
-        currentStockDict[ItemTypes.Types.SyrupBottleFiltered] = 0;
-        currentStockDict[ItemTypes.Types.TaffyTray] = 0;
-        currentStockDict[ItemTypes.Types.TaffyBox] = 0;
-        currentStockDict[ItemTypes.Types.IceCreamBucket] = 0;
-        //currentStockDict[ItemTypes.Types.SnowCandySingle] = 0;
-        //currentStockDict[ItemTypes.Types.SnowCandyBox] = 0;
+        // Ensure inventoryDict is initialized
+        if (inventoryDict == null)
+        {
+            Initialize();
+        }
+
+        UnityEngine.Debug.Log($"modify quantity of {itemType} {quantityChange}");
+        foreach (KeyValuePair<ItemTypes.Types, int> item in inventoryDict)
+        {
+            // item.Key gives you the ItemTypes.Types (the item type)
+            // item.Value gives you the quantity (the int value)
+            UnityEngine.Debug.Log($"Item: {item.Key}, Quantity: {item.Value}");
+        }
+        if (inventoryDict.ContainsKey(itemType))
+        {
+            inventoryDict[itemType] += quantityChange;
+        }
     }
-    #endregion
+
+    public int GetQuantity(ItemTypes.Types itemType)
+    {
+        // Ensure inventoryDict is initialized
+        if (inventoryDict == null)
+        {
+            Initialize();
+        }
+
+        if (inventoryDict.ContainsKey(itemType))
+        {
+            return inventoryDict[itemType];
+        }
+        else
+        {
+            return 0;  // Return 0 if item doesn't exist in inventory
+        }
+    }
 }
