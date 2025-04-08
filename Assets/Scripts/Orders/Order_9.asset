@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredItems:
   - itemTag: TaffyBox
-    requiredAmount: 3
+    requiredAmount: 2
     icon: {fileID: 21300000, guid: 9971b1b107e379742ba28414c2aabe36, type: 3}

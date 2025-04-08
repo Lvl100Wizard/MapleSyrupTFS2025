@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredItems:
   - itemTag: SyrupBottleFiltered
-    requiredAmount: 6
+    requiredAmount: 2
     icon: {fileID: 21300000, guid: b579a68a3a2ff354789d63a08ce29928, type: 3}
   - itemTag: IceCreamBucket
-    requiredAmount: 6
+    requiredAmount: 2
     icon: {fileID: 21300000, guid: 92ba9828e7c677a4f9eb1464e8eff1ef, type: 3}
   - itemTag: TaffyBox
-    requiredAmount: 3
+    requiredAmount: 2
     icon: {fileID: 21300000, guid: 9971b1b107e379742ba28414c2aabe36, type: 3}
