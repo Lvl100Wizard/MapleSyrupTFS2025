@@ -29,6 +29,7 @@ public class PlayerObjects : MonoBehaviour
 
         //newItem.transform needs change to item spawners location
         StartCoroutine(MoveToPosition(newItem.transform, targetLocalPosition));
+        UpdateStackPositions();
     }
 
     // ? Drop off a specific number of items of a given type (e.g., "Sap")
@@ -65,7 +66,7 @@ public class PlayerObjects : MonoBehaviour
             return false;
         }); */
 
-        UpdateStackPositions();
+        //UpdateStackPositions();
         Debug.Log($"{droppedCount} {itemTag} items dropped off.");
     }
 
@@ -87,6 +88,8 @@ public class PlayerObjects : MonoBehaviour
         }
 
         item.localPosition = targetLocalPosition;
+        UpdateStackPositions();
+
     }
 
     private IEnumerator MoveToDropOff(Transform item, Transform dropOffPoint)
@@ -106,6 +109,8 @@ public class PlayerObjects : MonoBehaviour
 
         item.position = targetPosition;
         Destroy(item.gameObject);
+        UpdateStackPositions();
+
     }
 
 

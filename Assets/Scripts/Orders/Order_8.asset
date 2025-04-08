@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredItems:
   - itemTag: SyrupBottleFiltered
-    requiredAmount: 4
+    requiredAmount: 3
     icon: {fileID: 21300000, guid: b579a68a3a2ff354789d63a08ce29928, type: 3}
   - itemTag: TaffyTray
     requiredAmount: 1

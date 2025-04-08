@@ -32,10 +32,11 @@ public class playerAnimator : MonoBehaviour
     // Method to switch between animation controllers
     void SwitchController(RuntimeAnimatorController ac)
     {
-        
+        if (animator.runtimeAnimatorController != ac)
+        {
             animator.runtimeAnimatorController = ac;
-        
-        
+        }
+
     }
 
     // Update is called once per frame

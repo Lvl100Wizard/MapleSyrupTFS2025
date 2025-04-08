@@ -63,8 +63,13 @@ public class playerController : MonoBehaviour
     void Move()
     {
 
+        
+
+
+        Debug.Log( "current input: " + _input.normalized.magnitude);
+
         //move character in forward direction based on rotation and if input is present
-        rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * moveSpeed * Time.deltaTime);
+        rb.MovePosition(transform.position + (transform.forward * _input.normalized.magnitude) * moveSpeed * Time.deltaTime);
 
 
         if (_input.magnitude > 0)
