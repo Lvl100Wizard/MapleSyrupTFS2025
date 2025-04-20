@@ -1,11 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ShopInventory", order = 1)]
-public class ShopInventory : AbstractSOContainer
+public class ShopInventory : ScriptableObject // : AbstractSOContainer
 {
-    public Dictionary<ItemTypes.Types, int> inventoryDict;
+    public Dictionary<ItemTypes.Types, int> inventoryDict; //unity doesn't serialize dictionaries by default...
+    public string why = "why";
+
+    [Serializable]
+    public class ItemEntry
+    {
+        public ItemTypes.Types itemType;
+        public int quantity;
+    }
+    [SerializeField] private List<ItemEntry> inventoryList = new List<ItemEntry>(); //they need to be stored in lists to be serialized... may want to change how we're doing this
 
     public void Initialize()
     {
@@ -14,7 +24,16 @@ public class ShopInventory : AbstractSOContainer
             inventoryDict = new Dictionary<ItemTypes.Types, int>();
         }
     }
-    
+
+    private void RebuildDictionary()
+    {
+        inventoryDict.Clear();
+        foreach (var entry in inventoryList)
+        {
+            inventoryDict[entry.itemType] = entry.quantity;
+        }
+    }
+    /*
     public void SetQuantity(ItemTypes.Types itemType, int quantity)
     {        
         if (inventoryDict == null)
@@ -30,8 +49,23 @@ public class ShopInventory : AbstractSOContainer
         {
             inventoryDict.Add(itemType, quantity);
         }
+    }*/
+
+    public void SetQuantity(ItemTypes.Types itemType, int quantity)
+    {
+        var entry = inventoryList.Find(e => e.itemType == itemType);
+        if (entry != null)
+        {
+            entry.quantity = quantity;
+        }
+        else
+        {
+            inventoryList.Add(new ItemEntry { itemType = itemType, quantity = quantity });
+        }
+        inventoryDict[itemType] = quantity;
     }
 
+    /*
     public void ModifyQuantity(ItemTypes.Types itemType, int quantityChange)
     {
         // Ensure inventoryDict is initialized
@@ -49,7 +83,38 @@ public class ShopInventory : AbstractSOContainer
         }
         if (inventoryDict.ContainsKey(itemType))
         {
+            inventoryList[]
             inventoryDict[itemType] += quantityChange;
+        }
+    }
+    */
+
+    public void ModifyQuantity(ItemTypes.Types itemType, int quantityDelta)
+    {
+        // Ensure inventoryDict is initialized
+        if (inventoryDict == null)
+        {
+            Initialize();
+        }
+
+        var entry = inventoryList.Find(e => e.itemType == itemType);
+        if (entry != null)
+        {
+            entry.quantity += quantityDelta;
+        }
+        else
+        {
+            inventoryList.Add(new ItemEntry { itemType = itemType, quantity = quantityDelta });
+        }
+
+        // Update the dictionary to stay in sync
+        if (inventoryDict.ContainsKey(itemType))
+        {
+            inventoryDict[itemType] += quantityDelta;
+        }
+        else
+        {
+            inventoryDict[itemType] = quantityDelta;
         }
     }
 
@@ -71,3 +136,4 @@ public class ShopInventory : AbstractSOContainer
         }
     }
 }
+
