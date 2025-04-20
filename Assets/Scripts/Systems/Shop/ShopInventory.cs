@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ShopInventory", order = 1)]
-public class ShopInventory : ScriptableObject // : AbstractSOContainer
+public class ShopInventory : AbstractSOContainer
 {
     public Dictionary<ItemTypes.Types, int> inventoryDict; //unity doesn't serialize dictionaries by default...
     public string why = "why";
