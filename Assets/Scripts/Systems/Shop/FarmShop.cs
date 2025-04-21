@@ -162,7 +162,8 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
                 inventoryPartDeux.ModifyQuantity(itemKey, -1);
 
                 UnityEngine.Debug.Log($"NPC buys a {itemToBuyKey} for {price} beaver bucks!");
-                playerWallet.GetMoney(price);
+                //playerWallet.GetMoney(price);
+                GameManager.Instance.ReceiveMoney((int)price);
             }            
             
             //iterate items wanted whether the npc got what they wanted or not
