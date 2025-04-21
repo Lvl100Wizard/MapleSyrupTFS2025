@@ -29,7 +29,8 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
     private void Start()
     {
         shopItemTypes = new ItemTypes();
-        //priceList = new ItemCosts();
+        shopPriceList = new ShopPriceList();
+
         /*
         //hard code cost list for bug workaround
         priceList.costDict[ItemTypes.Types.Sap] = 1f;
@@ -151,8 +152,14 @@ public class FarmShop : MonoBehaviour, IDropOffHandler, INPCPickUpHandler
             //if there is stock buy one, but if not we only check once for an alternate and then keep moving, odd but that's the logic for now
             if (inventoryPartDeux.GetQuantity(itemKey) > 0)
             {
+
+                Debug.Log($"attempting to get price for {itemKey}");
+                foreach (KeyValuePair<ItemTypes.Types, float> p in shopPriceList.Prices)
+                {
+                    UnityEngine.Debug.Log($"price list {p.Key}, {p.Value}");
+                }
                 float price = shopPriceList.GetPrice(itemKey);
-                inventoryPartDeux.ModifyQuantity(itemKey, -1);                
+                inventoryPartDeux.ModifyQuantity(itemKey, -1);
 
                 UnityEngine.Debug.Log($"NPC buys a {itemToBuyKey} for {price} beaver bucks!");
                 playerWallet.GetMoney(price);
